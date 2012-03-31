@@ -1,0 +1,32 @@
+name: SPL
+version: 2.7.6
+description: Spleef Game
+author: CallmePain
+website: http://www.callmepain.de
+
+main: de.callmepain.SPL.SPL
+depend: [bPermissions]
+
+commands: 
+  Spleef:
+    description: Spleef game command
+    usage: /<command>
+  SPL:
+    description: Spleef game command
+    usage: /<command>
+  SPLAdmin:
+    description: Spleef game command
+    usage: /<command>
+    
+permissions:
+    spl.*:
+        description: Give access to all spleef commands
+        children:
+            spl.join: true
+            spl.admin: true
+    spl.join:
+        description: Give access to all spleef commands
+        default: op
+    spl.admin:
+        description: Give access to all spleef commands
+        default: op

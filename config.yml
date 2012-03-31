@@ -1,0 +1,45 @@
+Spawn:
+  Loc1: callmepain.de,200.46875,63.0,142.65625,3.4496157,-354.74207
+  Loc2: callmepain.de,221.47345620046787,63.0,150.62944181324326,3.8999863,-268.79175
+Despawn:
+  Loc1: callmepain.de,205.36821071341862,63.0,174.52446102341952,15.299973,-179.39282
+  Loc2: callmepain.de,205.93214873282832,63.0,144.1204148765688,7.49998,-359.9933
+BG:
+  Loc1:
+    ==: Vector
+    x: 197.0
+    y: 61.0
+    z: 173.0
+  Loc2:
+    ==: Vector
+    x: 214.0
+    y: 61.0
+    z: 145.0
+SpawnRoom1:
+  Loc1:
+    ==: Vector
+    x: 198.0
+    y: 66.0
+    z: 140.0
+  Loc2:
+    ==: Vector
+    x: 202.0
+    y: 63.0
+    z: 144.0
+SpawnRoom2:
+  Loc1:
+    ==: Vector
+    x: 219.0
+    y: 66.0
+    z: 148.0
+  Loc2:
+    ==: Vector
+    x: 223.0
+    y: 63.0
+    z: 152.0
+Gate2:
+  Loc1: callmepain.de,219.0,63.0,150.0
+  Loc2: callmepain.de,219.0,64.0,150.0
+Gate1:
+  Loc1: callmepain.de,200.0,64.0,144.0
+  Loc2: callmepain.de,200.0,63.0,144.0
