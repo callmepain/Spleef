@@ -44,6 +44,7 @@ public class SPL extends JavaPlugin {
 	public static Economy economy = null;
 	private CommandCore cmdc;
 	public SPLUtil Util;
+	public String Ficken = "Fuck U";
 	
 	public FileConfiguration config;
 	public int SPL_SelTool;
