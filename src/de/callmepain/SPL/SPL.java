@@ -44,8 +44,6 @@ public class SPL extends JavaPlugin {
 	public static Economy economy = null;
 	private CommandCore cmdc;
 	public SPLUtil Util;
-	public String Ficken = "Fuck You";
-	
 	public FileConfiguration config;
 	public int SPL_SelTool;
 	public double SPL_Einsatz;
@@ -76,7 +74,7 @@ public class SPL extends JavaPlugin {
 	public int taskId5 = 0;
 	public int taskId6 = 0;
 	public int taskId7 = 0;
-	
+
 	public void onEnable() {
 		Util = new SPLUtil(this);
 		config = this.getConfig();
@@ -94,7 +92,7 @@ public class SPL extends JavaPlugin {
 		TStart = new TimerStart(this);
 		TClose = new TimerClose(this);
 		TPig = new TimerPlayeringame(this);
-		
+
 		cmdc = new CommandCore(this);
 		getServer().getPluginManager().registerEvents(PlayerMoveListener, this);
 		getServer().getPluginManager().registerEvents(BlockListener, this);
@@ -113,7 +111,7 @@ public class SPL extends JavaPlugin {
 		SPL_Bgid = 80;
 		SPL_Bgendid = 79;
 		Config.LoadConfig();
-		
+
 		if (!setupEconomy()) {
 			log.info(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
@@ -123,12 +121,12 @@ public class SPL extends JavaPlugin {
 		System.out.println(toString() + " enabled");
         log.info("Your plugin has been enabled.");       
 	}
-	
+
 	public void onDisable() {
 		System.out.println(toString() + " disabled");
 		log.info("Your plugin has been disabled.");
 	}
-	
+
 	private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
