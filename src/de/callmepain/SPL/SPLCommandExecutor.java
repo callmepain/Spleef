@@ -1,5 +1,6 @@
 package de.callmepain.SPL;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -46,7 +47,9 @@ public class SPLCommandExecutor implements CommandExecutor {
 				return true;
 			}
 			else if (args[0].equalsIgnoreCase("top")) {
-								
+				SPLPlayer p = new SPLPlayer(player, false, 100);
+				Bukkit.broadcastMessage(String.valueOf(p.getPlayerScore(player)));
+				Bukkit.broadcastMessage(String.valueOf(p.isPlayerQuite(player)));
 			}
 			else if (args[0].equalsIgnoreCase("join")) {
 				if (!player.hasPermission("spl.join")) {
