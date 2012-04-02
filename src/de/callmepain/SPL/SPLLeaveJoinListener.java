@@ -20,19 +20,24 @@ public class SPLLeaveJoinListener implements Listener{
 					plugin.Util.SPL_End();
 					plugin.SPL_Player.put("quite", event.getPlayer());
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + plugin.Chattext + "hat das Spiel verlassen und somit verloren...");
-					plugin.SPL_Player.get("2").teleport(plugin.SPL_Spawn.get("Despawn1"));
-					plugin.Util.fill(event.getPlayer().getWorld(), 79);
-					plugin.SPL_Player.put("1", null);
-					plugin.SPL_Player.put("2", null);
-					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
-				}
-			}
-			if (plugin.SPL_Player.get("2") != null) {
+					if (plugin.SPL_Player.get("2") != null) {
+						plugin.SPL_Player.get("2").teleport(plugin.SPL_Spawn.get("Despawn1"));
+					}
+ 					plugin.Util.fill(event.getPlayer().getWorld(), 79);
+ 					plugin.SPL_Player.put("1", null);
+ 					plugin.SPL_Player.put("2", null);
+ 					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
+ 				}
+ 			}
+			else if (plugin.SPL_Player.get("2") != null) {
 				if (event.getPlayer().getName() == plugin.SPL_Player.get("2").getName()) {
 					plugin.Util.SPL_End();
 					plugin.SPL_Player.put("quite", event.getPlayer());
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("2").getName() + plugin.Chattext + "hat das Spiel verlassen und somit verloren...");
 					plugin.SPL_Player.get("1").teleport(plugin.SPL_Spawn.get("Despawn1"));
+					if (plugin.SPL_Player.get("1") != null) {
+						plugin.SPL_Player.get("1").teleport(plugin.SPL_Spawn.get("Despawn2"));
+					}
 					plugin.Util.fill(event.getPlayer().getWorld(), 79);
 					plugin.SPL_Player.put("1", null);
 					plugin.SPL_Player.put("2", null);
