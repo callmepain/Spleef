@@ -1,10 +1,12 @@
-package de.callmepain.SPL;
+package de.callmepain.SPL.Listener;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDamageEvent;
+
+import de.callmepain.SPL.SPL;
 
 public class SPLBlockDamage implements Listener {
 	SPL plugin;

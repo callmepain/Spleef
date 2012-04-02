@@ -1,4 +1,4 @@
-package de.callmepain.SPL;
+package de.callmepain.SPL.Listener;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -9,6 +9,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import de.callmepain.SPL.SPL;
 
 public class SPLPlayerInteractListener implements Listener {
 	SPL plugin;

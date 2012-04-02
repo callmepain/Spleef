@@ -1,4 +1,4 @@
-package de.callmepain.SPL;
+package de.callmepain.SPL.Listener;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,6 +9,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+
+import de.callmepain.SPL.SPL;
+import de.callmepain.SPL.SPLIO;
+import de.callmepain.SPL.SPLUtil;
 
 public class SPLPlayerMoveListener implements Listener {
 	SPL plugin;
