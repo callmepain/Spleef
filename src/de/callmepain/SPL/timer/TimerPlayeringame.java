@@ -9,7 +9,6 @@ public class TimerPlayeringame implements Runnable{
 		}
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-			plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + plugin.Chattext + "Wartet noch immer auf einen Gegner!");
+			plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + plugin.Chattext + " Wartet noch immer auf einen Gegner!");
 		}
 }
