@@ -110,6 +110,7 @@ public class SPLCommandExecutor implements CommandExecutor {
 			else if (args[0].equalsIgnoreCase("Leave")) {
 				if (!player.hasPermission("spl.join")) {
 					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
+					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
 					return true;
 				}
 				else {
