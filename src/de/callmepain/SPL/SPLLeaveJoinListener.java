@@ -24,6 +24,7 @@ public class SPLLeaveJoinListener implements Listener{
 					plugin.Util.fill(event.getPlayer().getWorld(), 79);
 					plugin.SPL_Player.put("1", null);
 					plugin.SPL_Player.put("2", null);
+					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
 				}
 			}
 			if (plugin.SPL_Player.get("2") != null) {
@@ -35,6 +36,7 @@ public class SPLLeaveJoinListener implements Listener{
 					plugin.Util.fill(event.getPlayer().getWorld(), 79);
 					plugin.SPL_Player.put("1", null);
 					plugin.SPL_Player.put("2", null);
+					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
 				}
 			}
 		}
