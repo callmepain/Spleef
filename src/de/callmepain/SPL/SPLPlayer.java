@@ -7,12 +7,38 @@ public class SPLPlayer {
 	private HashMap<String, Player> SPL_Player = new HashMap<String, Player>();
 	private HashMap<String, Boolean> SPL_Quite = new HashMap<String, Boolean>();
 	private HashMap<String, Integer> SPL_Score = new HashMap<String, Integer>();
-	public SPLPlayer(Player player, boolean quite, int Score) {
-		SPL_Player.put(player.getName(), player);
-		SPL_Quite.put(player.getName(), quite);
-		SPL_Score.put(player.getName(), Score);
+	public SPLPlayer() {
+		SPLIO.loadHash(SPL_Score, SPL.log);
 	}
-	public boolean isPlayerQuite(Player player) {
+	public void setPlayer1(Player player) {
+		SPL_Player.put("player1", player);
+		if (SPL_Score.get(player.getName()) == null) {
+			SPL_Score.put(player.getName(), 0);
+			SPLIO.saveHash(SPL_Score, SPL.log);
+		}
+	}
+	public void setPlayer2(Player player) {
+		SPL_Player.put("player2", player);
+		if (SPL_Score.get(player.getName()) == null) {
+			SPL_Score.put(player.getName(), 0);
+			SPLIO.saveHash(SPL_Score, SPL.log);
+		}
+	}
+	public void setPlayer3(Player player) {
+		SPL_Player.put("player3", player);
+		if (SPL_Score.get(player.getName()) == null) {
+			SPL_Score.put(player.getName(), 0);
+			SPLIO.saveHash(SPL_Score, SPL.log);
+		}
+	}
+	public void setPlayer4(Player player) {
+		SPL_Player.put("player4", player);
+		if (SPL_Score.get(player.getName()) == null) {
+			SPL_Score.put(player.getName(), 0);
+			SPLIO.saveHash(SPL_Score, SPL.log);
+		}
+	}
+	public boolean getPlayerQuite(Player player) {
 		return SPL_Quite.get(player.getName());
 	}
 	public int getPlayerScore(Player player) {
@@ -20,8 +46,25 @@ public class SPLPlayer {
 	}
 	public void setPlayerScore(Player player, int score) {
 		SPL_Score.put(player.getName(), score);
+		SPLIO.saveHash(SPL_Score, SPL.log);
 	}
 	public void setPlayerQuite(Player player, boolean quite) {
 		SPL_Quite.put(player.getName(), quite);
+	}
+	public Player getPlayer1() {
+		Player p = SPL_Player.get("player1");
+		return p;
+	}
+	public Player getPlayer2() {
+		Player p = SPL_Player.get("player2");
+		return p;
+	}
+	public Player getPlayer3() {
+		Player p = SPL_Player.get("player3");
+		return p;
+	}
+	public Player getPlayer4() {
+		Player p = SPL_Player.get("player4");
+		return p;
 	}
 }

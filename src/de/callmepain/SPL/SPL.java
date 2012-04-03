@@ -11,7 +11,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
@@ -26,7 +25,7 @@ import de.callmepain.SPL.timer.*;
 
 
 public class SPL extends JavaPlugin {
-	public Logger log = Logger.getLogger("Minecraft");
+	public static Logger log = Logger.getLogger("Minecraft");
 	public SPLPlayerMoveListener PlayerMoveListener;
 	public SPLBlockListener BlockListener;
 	public SPLPlayerInteractListener PlayerInteractListener;
@@ -44,6 +43,7 @@ public class SPL extends JavaPlugin {
 	public static Economy economy = null;
 	private CommandCore cmdc;
 	public SPLUtil Util;
+	public SPLPlayer SPL_Player = new SPLPlayer();
 	
 	public FileConfiguration config;
 	public int SPL_SelTool;
@@ -56,8 +56,6 @@ public class SPL extends JavaPlugin {
 	public HashMap<String, Location> SPL_Spawn = new HashMap<String, Location>();
 	public Map<String, Location> SPL_Gate = new HashMap<String, Location>();
 	public HashMap<String, Boolean> SPL_State = new HashMap<String, Boolean>();
-	public HashMap<String, Player> SPL_Player = new HashMap<String, Player>();
-	public HashMap<String, Integer> SPL_Playerscore = new HashMap<String, Integer>();
 	public HashMap<String, Block> SPL_Block = new HashMap<String, Block>();
 	public int SPL_Bgid;
 	public int SPL_Bgendid;
@@ -118,7 +116,7 @@ public class SPL extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
 		}
-		SPLIO.loadHash(SPL_Playerscore, log);
+//		SPLIO.loadHash(SPL_Playerscore, log);
 		System.out.println(toString() + " enabled");
         log.info("Your plugin has been enabled.");       
 	}
