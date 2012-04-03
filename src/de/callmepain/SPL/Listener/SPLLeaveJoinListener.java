@@ -30,7 +30,7 @@ public class SPLLeaveJoinListener implements Listener{
  					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
  				}
  			}
-			else if (plugin.SPL_Player.getPlayer2() != null) {
+			if (plugin.SPL_Player.getPlayer2() != null) {
 				if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer2().getName()) {
 					plugin.Util.SPL_End();
 					plugin.SPL_Player.setPlayerQuite(event.getPlayer(), true);
@@ -50,7 +50,8 @@ public class SPLLeaveJoinListener implements Listener{
 		if (plugin.SPL_Player.getPlayerQuite(event.getPlayer())) {
 			event.getPlayer().teleport(plugin.SPL_Spawn.get("Despawn1"));
 			event.getPlayer().sendMessage(plugin.Chaterr + "du hast dich werden eines laufenden Spleef Spieles ausgelogt und hast somit verloren!");
-			plugin.SPL_Player.reset();
+			plugin.SPL_Player.setPlayerQuite(event.getPlayer(), false);
+			
 		}
 	}
 }
