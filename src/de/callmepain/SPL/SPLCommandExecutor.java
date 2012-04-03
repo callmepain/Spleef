@@ -85,7 +85,7 @@ public class SPLCommandExecutor implements CommandExecutor {
 					else {
 						plugin.SPL_Player.setPlayer2(player);
 						player.teleport(plugin.SPL_Spawn.get("Spawn2"));
-						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayer2()) + "]");
+						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "]");
 						plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
 						plugin.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T3, 140L);
 						plugin.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T2, 160L);
