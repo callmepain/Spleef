@@ -47,6 +47,7 @@ public class SPLPlayerMoveListener implements Listener {
 					plugin.SPL_Player.getPlayer1().getInventory().addItem(itemsmall);
 					
 					plugin.Util.SPL_End();
+					plugin.SPL_Player.reset();
 					plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn2"));
 					plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn1"));
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
@@ -73,6 +74,7 @@ public class SPLPlayerMoveListener implements Listener {
 					plugin.SPL_Player.getPlayer2().getInventory().addItem(itemsmall);
 					
 					plugin.Util.SPL_End();
+					plugin.SPL_Player.reset();
 					plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn2"));
 					plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn1"));
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
@@ -94,6 +96,7 @@ public class SPLPlayerMoveListener implements Listener {
 						SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 						plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
 						plugin.Util.SPLTimerReset();
+						plugin.SPL_Player.reset();
 					}
 				}
 			}

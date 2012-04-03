@@ -12,6 +12,7 @@ public class SPLPlayer {
 	}
 	public void setPlayer1(Player player) {
 		SPL_Player.put("player1", player);
+		SPL_Quite.put("player1", false);
 		if (SPL_Score.get(player.getName()) == null) {
 			SPL_Score.put(player.getName(), 0);
 			SPLIO.saveHash(SPL_Score, SPL.log);
@@ -19,6 +20,7 @@ public class SPLPlayer {
 	}
 	public void setPlayer2(Player player) {
 		SPL_Player.put("player2", player);
+		SPL_Quite.put("player2", false);
 		if (SPL_Score.get(player.getName()) == null) {
 			SPL_Score.put(player.getName(), 0);
 			SPLIO.saveHash(SPL_Score, SPL.log);
@@ -26,6 +28,7 @@ public class SPLPlayer {
 	}
 	public void setPlayer3(Player player) {
 		SPL_Player.put("player3", player);
+		SPL_Quite.put("player3", false);
 		if (SPL_Score.get(player.getName()) == null) {
 			SPL_Score.put(player.getName(), 0);
 			SPLIO.saveHash(SPL_Score, SPL.log);
@@ -33,6 +36,7 @@ public class SPLPlayer {
 	}
 	public void setPlayer4(Player player) {
 		SPL_Player.put("player4", player);
+		SPL_Quite.put("player4", false);
 		if (SPL_Score.get(player.getName()) == null) {
 			SPL_Score.put(player.getName(), 0);
 			SPLIO.saveHash(SPL_Score, SPL.log);
@@ -66,5 +70,9 @@ public class SPLPlayer {
 	public Player getPlayer4() {
 		Player p = SPL_Player.get("player4");
 		return p;
+	}
+	public void reset() {
+		SPL_Player = null;
+		SPL_Quite = null;
 	}
 }
