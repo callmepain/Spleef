@@ -332,10 +332,10 @@ public class SPLUtil {
 	public void SPLTimerReset() {
 		plugin.getServer().getScheduler().cancelTask(plugin.taskId1);
 		plugin.getServer().getScheduler().cancelTask(plugin.taskId2);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId3);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId4);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId5);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId6);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskid3);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidfight);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidstart);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidclose);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
 	}
 }

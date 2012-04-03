@@ -27,7 +27,7 @@ public class SPLLeaveJoinListener implements Listener{
 					}
  					plugin.Util.fill(event.getPlayer().getWorld(), 79);
  					plugin.SPL_Player.setPlayerQuite(event.getPlayer(), true);
- 					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
+ 					plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
  				}
  			}
 			if (plugin.SPL_Player.getPlayer2() != null) {
@@ -40,7 +40,7 @@ public class SPLLeaveJoinListener implements Listener{
 					}
 					plugin.Util.fill(event.getPlayer().getWorld(), 79);
 					plugin.SPL_Player.setPlayerQuite(event.getPlayer(), true);
-					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
+					plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
 				}
 			}
 		}

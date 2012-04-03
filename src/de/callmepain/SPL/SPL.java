@@ -68,11 +68,11 @@ public class SPL extends JavaPlugin {
 	public String SPL_Fieldtyp = "Schnee";
 	public int taskId1 = 0;
 	public int taskId2 = 0;
-	public int taskId3 = 0;
-	public int taskId4 = 0;
-	public int taskId5 = 0;
-	public int taskId6 = 0;
-	public int taskId7 = 0;
+	public int taskid3 = 0;
+	public int taskidfight = 0;
+	public int taskidstart = 0;
+	public int taskidclose = 0;
+	public int taskidplayeringame = 0;
 	
 	public void onEnable() {
 		Util = new SPLUtil(this);
@@ -116,7 +116,6 @@ public class SPL extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
 		}
-//		SPLIO.loadHash(SPL_Playerscore, log);
 		System.out.println(toString() + " enabled");
         log.info("Your plugin has been enabled.");       
 	}
