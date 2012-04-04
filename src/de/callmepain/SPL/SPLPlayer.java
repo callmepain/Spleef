@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class SPLPlayer {
 	private HashMap<String, Player> SPL_Player = new HashMap<String, Player>();
-	private HashMap<String, Boolean> SPL_Quite = new HashMap<String, Boolean>();
+	public HashMap<String, Boolean> SPL_Quite = new HashMap<String, Boolean>();
 	private HashMap<String, Integer> SPL_Score = new HashMap<String, Integer>();
 	public SPLPlayer() {
 		SPLIO.loadHash(SPL_Score, SPL.log);
