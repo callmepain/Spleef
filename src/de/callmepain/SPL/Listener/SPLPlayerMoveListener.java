@@ -38,7 +38,6 @@ public class SPLPlayerMoveListener implements Listener {
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
-					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chattext + " erhält:");
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
 					
@@ -71,7 +70,6 @@ public class SPLPlayerMoveListener implements Listener {
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
-					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chattext + " erhält:");
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
 					
