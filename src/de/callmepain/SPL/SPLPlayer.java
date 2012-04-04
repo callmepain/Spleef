@@ -71,8 +71,8 @@ public class SPLPlayer {
 		Player p = SPL_Player.get("player4");
 		return p;
 	}
-	public void reset() {
-		SPL_Player = null;
+	public void reset(SPL instance) {
+		instance.SPL_Player = new SPLPlayer();
 		SPL_Quite = null;
 	}
 }

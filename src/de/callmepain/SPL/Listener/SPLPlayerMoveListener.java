@@ -35,8 +35,7 @@ public class SPLPlayerMoveListener implements Listener {
 						
 					ItemStack item = SPLUtil.SPLItem();
 					ItemStack itemsmall = SPLUtil.SPLItemSmall();
-					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat gewonnen");
-					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chattext + "du erhälst:");
+					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chattext + " erhält:");
@@ -52,13 +51,13 @@ public class SPLPlayerMoveListener implements Listener {
 					
 					plugin.SPL_Player.getPlayer1().getInventory().addItem(itemsmall);
 					
-					plugin.Util.SPL_End();
-					plugin.SPL_Player.reset();
 					plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn2"));
 					plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn1"));
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 					plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
+					plugin.Util.SPL_End();
+					plugin.SPL_Player.reset(plugin);
 				}
 			}
 			else if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer2().getName()) {
@@ -69,8 +68,7 @@ public class SPLPlayerMoveListener implements Listener {
 
 					ItemStack item = SPLUtil.SPLItem();
 					ItemStack itemsmall = SPLUtil.SPLItemSmall();
-					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat gewonnen");
-					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chattext + "du erhälst:");
+					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
 					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
 					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chattext + " erhält:");
@@ -86,13 +84,13 @@ public class SPLPlayerMoveListener implements Listener {
 					plugin.SPL_Player.getPlayer1().getInventory().addItem(SPLUtil.SPL_Item.get(3001));
 					plugin.SPL_Player.getPlayer2().getInventory().addItem(itemsmall);
 					
-					plugin.Util.SPL_End();
-					plugin.SPL_Player.reset();
 					plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn2"));
 					plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn1"));
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 					plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
+					plugin.Util.SPL_End();
+					plugin.SPL_Player.reset(plugin);
 				}
 			}
 		}
@@ -104,12 +102,14 @@ public class SPLPlayerMoveListener implements Listener {
 				if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer1().getName()) {
 					if (!SPLUtil.checkCuboid(event.getPlayer().getLocation(),plugin.SPL_SpawnRoom.get("SpawnRoom1loc1"),plugin.SPL_SpawnRoom.get("SpawnRoom1loc2"))) {
 						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chattext + " hat die Arena verlassen!");
-						plugin.Util.SPL_End();
+						plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn1"));
+						plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chaterr + "Du sollst " + plugin.Chatitem + "/spl leave " + plugin.Chaterr + "nutzen um die Arena zu verlassen!");
 						SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 						SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 						plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
 						plugin.Util.SPLTimerReset();
-						plugin.SPL_Player.reset();
+						plugin.Util.SPL_End();
+						plugin.SPL_Player.reset(plugin);
 					}
 				}
 			}

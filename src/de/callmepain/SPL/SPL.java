@@ -43,7 +43,8 @@ public class SPL extends JavaPlugin {
 	public static Economy economy = null;
 	private CommandCore cmdc;
 	public SPLUtil Util;
-	public SPLPlayer SPL_Player = new SPLPlayer();
+	public SPLPlayer SPL_Player;
+	
 	
 	public FileConfiguration config;
 	public int SPL_SelTool;
@@ -75,6 +76,7 @@ public class SPL extends JavaPlugin {
 	public int taskidplayeringame = 0;
 	
 	public void onEnable() {
+		SPL_Player = new SPLPlayer();
 		Util = new SPLUtil(this);
 		config = this.getConfig();
 		PlayerMoveListener = new SPLPlayerMoveListener(this);
