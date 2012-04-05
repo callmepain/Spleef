@@ -104,7 +104,6 @@ public class SPLCommandExecutor implements CommandExecutor {
 			else if (args[0].equalsIgnoreCase("Leave")) {
 				if (!player.hasPermission("spl.join")) {
 					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
-					plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
 					return true;
 				}
 				else {
@@ -114,6 +113,7 @@ public class SPLCommandExecutor implements CommandExecutor {
 						plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn2"));
 					}
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die Arena verlassen...");
+					plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
 					plugin.SPL_Player.reset(plugin);
 					return true;
 				}

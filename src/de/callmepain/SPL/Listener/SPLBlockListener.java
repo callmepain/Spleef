@@ -20,8 +20,9 @@ public class SPLBlockListener implements Listener {
 			if (event.getBlock().getType() == Material.SNOW_BLOCK) {
 				for (int i = 0; i < 19; i++) {
 					if (event.getBlock().getLocation() == plugin.SPL_Explosion.get(i)) {
-						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 20);
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 1);
 						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+						plugin.Util.SPLBroadcast("ficken");
 					}
 					else {
 						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
@@ -31,8 +32,22 @@ public class SPLBlockListener implements Listener {
 			else if (event.getBlock().getType() == Material.ICE) {
 				for (int i = 0; i < 19; i++) {
 					if (event.getBlock().getLocation() == plugin.SPL_Explosion.get(i)) {
-						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 20);
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 1);
 						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+						plugin.Util.SPLBroadcast("ficken");
+					}
+					else {
+						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+					}
+				}
+				
+			}
+			else if (event.getBlock().getType() == Material.GRASS) {
+				for (int i = 0; i < 19; i++) {
+					if (event.getBlock().getLocation() == plugin.SPL_Explosion.get(i)) {
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), (float)1);
+						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+						plugin.Util.SPLBroadcast("ficken");
 					}
 					else {
 						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
