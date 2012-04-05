@@ -14,6 +14,7 @@ public class TimerFight implements Runnable{
 		}
 		else {
 			plugin.Util.fill(plugin.SPL_Spawn.get("Spawn1").getWorld(), plugin.SPL_Bgid);
+			plugin.Util.SPLExplosion(plugin.SPL_Spawn.get("Spawn1").getWorld(), plugin.SPL_Bgid);
 			plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chattext + "Fight!!!");
 			plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chattext + "Fight!!!");
 		}

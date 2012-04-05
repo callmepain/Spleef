@@ -18,10 +18,27 @@ public class SPLBlockListener implements Listener {
 	public void BlockBreaker(BlockBreakEvent event) {
 		if ((plugin.SPL_State.get("running")) && (plugin.SPL_State.get("game"))) {
 			if (event.getBlock().getType() == Material.SNOW_BLOCK) {
-				event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+				for (int i = 0; i < 19; i++) {
+					if (event.getBlock().getLocation() == plugin.SPL_Explosion.get(i)) {
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 20);
+						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+					}
+					else {
+						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+					}
+				}
 			}
 			else if (event.getBlock().getType() == Material.ICE) {
-				event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+				for (int i = 0; i < 19; i++) {
+					if (event.getBlock().getLocation() == plugin.SPL_Explosion.get(i)) {
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 20);
+						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+					}
+					else {
+						event.getBlock().breakNaturally(new ItemStack(Material.AIR, 1));
+					}
+				}
+				
 			}
 		}
 	}

@@ -17,7 +17,6 @@ public class TimerClose implements Runnable {
 			plugin.Util.SPLTimerReset();
 		}
 		else {
-			plugin.Util.SPLExplosion(plugin.SPL_Spawn.get("Spawn1").getWorld());
 			plugin.SPL_Block.put("11", plugin.SPL_Spawn.get("Spawn1").getWorld().getBlockAt(plugin.SPL_Gate.get("Gate1Loc1")));
 			plugin.SPL_Block.get("11").setTypeId(101);
 			plugin.SPL_Block.put("12", plugin.SPL_Spawn.get("Spawn1").getWorld().getBlockAt(plugin.SPL_Gate.get("Gate1Loc2")));

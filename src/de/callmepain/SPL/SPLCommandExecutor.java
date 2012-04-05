@@ -45,6 +45,9 @@ public class SPLCommandExecutor implements CommandExecutor {
 				player.sendMessage(plugin.Chattext + "reload complete");
 				return true;
 			}
+			else if (args[0].equalsIgnoreCase("test")) {
+				plugin.Util.SPLExplosion(w, 2);
+			}
 			else if (args[0].equalsIgnoreCase("join")) {
 				if (!player.hasPermission("spl.join")) {
 					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
