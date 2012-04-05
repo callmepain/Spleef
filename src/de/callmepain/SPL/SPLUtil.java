@@ -326,6 +326,59 @@ public class SPLUtil {
 		Tfill.run();
 		Tfill = null;
 	}
+	public void SPLExplosion(final World w) {
+		Thread TExplosion = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				double x1 = plugin.SPL_Bg.get("Loc1").getX();
+				double x2 = plugin.SPL_Bg.get("Loc2").getX();
+				double z1 = plugin.SPL_Bg.get("Loc1").getZ();
+				double z2 = plugin.SPL_Bg.get("Loc2").getZ();
+				int x4 = 0;
+				int z4 = 0;
+				int x3 = 0;
+				int z3 = 0;
+				double x5 = 0;
+				double z5 = 0;
+				if (x1 < x2) {
+					x4 =(int) plugin.SPL_Bg.get("Loc2").getX();
+					x3 =(int) plugin.SPL_Bg.get("Loc1").getX();
+				}
+				else {
+					x4 =(int) plugin.SPL_Bg.get("Loc1").getX();
+					x3 =(int) plugin.SPL_Bg.get("Loc2").getX();
+				}
+				if (z1 < z2) {
+					z4 =(int) plugin.SPL_Bg.get("Loc2").getZ();
+					z3 =(int) plugin.SPL_Bg.get("Loc1").getZ();
+				}
+				else {
+					z4 =(int) plugin.SPL_Bg.get("Loc1").getZ();
+					z3 =(int) plugin.SPL_Bg.get("Loc2").getZ();
+				}
+				Random rnd = new Random();
+				Random rnd2 = new Random();
+				for (int i = 0; i <= 4; i++) {
+					for (int x = 0; x < rnd.nextInt(x4); x++) {
+						while (x3 < x5) {
+							x5 = rnd.nextInt(x4);
+						}
+						for (int z = 0; z < rnd2.nextInt(z4); z++) {
+							while (z3 < z5) {
+								z5 = rnd.nextInt(z4);
+							}
+							plugin.SPL_Explosion.put(i, new Location(w, x5, z5, plugin.SPL_Bg.get("Loc1").getY()));
+							Block btc = w.getBlockAt(plugin.SPL_Explosion.get(i));
+							btc.setTypeId(2);
+						}
+					}
+				}
+				SPLBroadcast(String.valueOf(plugin.SPL_Explosion.get(1).getX()) + " * " + String.valueOf(plugin.SPL_Explosion.get(1).getZ()) + " * " + String.valueOf(plugin.SPL_Explosion.get(1).getY()));
+			}
+		});
+		TExplosion.run();
+		TExplosion = null;
+	}
 	public void SPLBroadcast(String args) {
 		plugin.getServer().broadcastMessage(args);
 	}

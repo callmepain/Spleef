@@ -51,6 +51,7 @@ public class SPL extends JavaPlugin {
 	public double SPL_Einsatz;
 	public boolean SPL_hasEinsatz;
 	public HashMap<String, Location> SPL_Sel = new HashMap<String, Location>();
+	public HashMap<Integer, Location> SPL_Explosion = new HashMap<Integer, Location>();
 	public HashMap<String, Vector> SPL_SpawnRoom = new HashMap<String, Vector>();
 	public HashMap<String, Vector> SPL_Bg = new HashMap<String, Vector>();
 	public HashMap<String, Vector> SPL_Arena = new HashMap<String, Vector>();
