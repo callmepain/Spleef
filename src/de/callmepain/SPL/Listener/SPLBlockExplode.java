@@ -1,5 +1,10 @@
 package de.callmepain.SPL.Listener;	
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -13,7 +18,7 @@ public class SPLBlockExplode implements Listener{
 		plugin = instance;
 	}
 	@EventHandler(priority = EventPriority.LOW)
-	public void onEntityExplode(ItemSpawnEvent event)
+	public void onItemSoawn(ItemSpawnEvent event)
     {
 		if ((plugin.SPL_State.get("game")) && (plugin.SPL_State.get("running"))) {
 			if (event.getEntity().getItemStack().getTypeId() == 332) {
@@ -25,7 +30,13 @@ public class SPLBlockExplode implements Listener{
 	public void onEntityExplode(EntityExplodeEvent event)
     {
 		if ((plugin.SPL_State.get("game")) && (plugin.SPL_State.get("running"))) {
-			event.blockList().clear();
+			List<Block> blockListCopy = new ArrayList<Block>();
+	        blockListCopy.addAll(event.blockList());
+	        for (Block block : blockListCopy) {
+	            if ((block.getType() != Material.ICE) && (block.getType() != Material.SNOW_BLOCK)) {
+	            	event.blockList().remove(block);
+	            }
+	        }
 		}
     }
 }
