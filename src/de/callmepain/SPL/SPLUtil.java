@@ -408,5 +408,6 @@ public class SPLUtil {
 		plugin.getServer().getScheduler().cancelTask(plugin.taskidstart);
 		plugin.getServer().getScheduler().cancelTask(plugin.taskidclose);
 		plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
 	}
 }

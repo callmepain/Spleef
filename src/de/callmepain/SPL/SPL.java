@@ -41,6 +41,7 @@ public class SPL extends JavaPlugin {
 	public TimerFight TFight;
 	public TimerStart TStart;
 	public TimerClose TClose;
+	public TimerLeave TLeave;
 	public TimerPlayeringame TPig;
 	public static Economy economy = null;
 	private CommandCore cmdc;
@@ -76,6 +77,7 @@ public class SPL extends JavaPlugin {
 	public int taskidfight = 0;
 	public int taskidstart = 0;
 	public int taskidclose = 0;
+	public int taskidleave = 0;
 	public int taskidplayeringame = 0;
 	
 	public void onEnable() {
@@ -97,6 +99,7 @@ public class SPL extends JavaPlugin {
 		TStart = new TimerStart(this);
 		TClose = new TimerClose(this);
 		TPig = new TimerPlayeringame(this);
+		TLeave = new TimerLeave(this);
 		
 		cmdc = new CommandCore(this);
 		getServer().getPluginManager().registerEvents(PlayerMoveListener, this);

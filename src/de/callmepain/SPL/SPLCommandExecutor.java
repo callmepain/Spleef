@@ -68,7 +68,7 @@ public class SPLCommandExecutor implements CommandExecutor {
 					plugin.SPL_Player.setPlayer1(player);
 					player.teleport(plugin.SPL_Spawn.get("Spawn1"));
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die " + plugin.Chatitem + "Spleef Arena v." +  plugin.getDescription().getVersion() + plugin.Chattext + " betreten ");
-					player.sendMessage(plugin.Chattext + "sollte sich kein Gegner finden gib " + plugin.Chatitem + "/spl leave" + plugin.Chattext + " ein");
+					plugin.taskidleave = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TLeave, 600L);
 					plugin.taskidplayeringame = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, plugin.TPig, 1200L, 1200L);
 					plugin.SPL_State.put("game", true);
 					return true;
@@ -82,6 +82,7 @@ public class SPLCommandExecutor implements CommandExecutor {
 						player.teleport(plugin.SPL_Spawn.get("Spawn2"));
 						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "]");
 						plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
+						plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
 						plugin.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T3, 140L);
 						plugin.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T2, 160L);
 						plugin.taskid3 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T1, 180L);
