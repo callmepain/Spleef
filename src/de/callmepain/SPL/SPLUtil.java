@@ -264,7 +264,7 @@ public class SPLUtil {
 		Tgfill.run();
 		Tgfill = null;
 	}
-	public static boolean SPL_Mode() {
+	private static boolean SPL_Mode() {
 		boolean bo = false;
 		Random rnd = new Random();
 		for (int i = 0; i < rnd.nextInt(35); i++) {
@@ -280,6 +280,17 @@ public class SPLUtil {
 			}
 		}
 		return bo;
+	}
+	public void SPL_ModeChange() {
+		if (SPLUtil.SPL_Mode())
+		{
+			plugin.SPL_Bgid = 79;
+			plugin.SPL_Fieldtyp = "Ice";
+		}
+		else {
+			plugin.SPL_Bgid = 80;
+			plugin.SPL_Fieldtyp = "Schnee";
+		}
 	}
 	public void SPL_End() {
 		plugin.SPL_State.put("game", false);
@@ -326,7 +337,7 @@ public class SPLUtil {
 		Tfill.run();
 		Tfill = null;
 	}
-	public void SPLRndExplosion(final World w, final int id) {
+	private void SPLRndExplosion(final World w, final int id) {
 		Thread TExplosion = new Thread(new Runnable() {
 			@Override
 			public void run() {

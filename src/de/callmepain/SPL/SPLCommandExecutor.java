@@ -62,15 +62,7 @@ public class SPLCommandExecutor implements CommandExecutor {
 					return true;
 				}
 				if(!plugin.SPL_State.get("game")) {
-					if (SPLUtil.SPL_Mode())
-					{
-						plugin.SPL_Bgid = 79;
-						plugin.SPL_Fieldtyp = "Ice";
-					}
-					else {
-						plugin.SPL_Bgid = 80;
-						plugin.SPL_Fieldtyp = "Schnee";
-					}
+					plugin.Util.SPL_ModeChange();
 					SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 					SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 					plugin.SPL_Player.setPlayer1(player);
