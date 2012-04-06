@@ -14,10 +14,10 @@ public class SPLBlockExplode implements Listener{
 	@EventHandler(priority = EventPriority.LOW)
 	public void onEntityExplode(ItemSpawnEvent event)
     {
-		plugin.Util.SPLBroadcast(event.getEntity().getItemStack().getType().toString());
-
-		if (event.getEntity().getItemStack().getTypeId() == 332) {
-			event.getEntity().remove();
+		if ((plugin.SPL_State.get("game")) && (plugin.SPL_State.get("running"))) {
+			if (event.getEntity().getItemStack().getTypeId() == 332) {
+				event.getEntity().remove();
+			}
 		}
     }
 }
