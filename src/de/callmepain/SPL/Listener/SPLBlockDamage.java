@@ -24,7 +24,15 @@ public class SPLBlockDamage implements Listener {
 		}*/
 		if ((plugin.SPL_State.get("running")) && (plugin.SPL_State.get("game"))) {
 			if (event.getBlock().getType() == Material.SNOW_BLOCK) {
-				event.setInstaBreak(true);
+				for (int i = 0; i < 19; i++) {
+					if (((int)event.getBlock().getLocation().getX() == (int) plugin.SPL_Explosion.get(i).getX()) && ((int)event.getBlock().getLocation().getZ() == (int)plugin.SPL_Explosion.get(i).getZ())) {
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 1);
+						event.setInstaBreak(true);
+					}
+					else {
+						event.setInstaBreak(true);
+					}
+				}
 			}
 		}
 		else {

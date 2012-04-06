@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6"/>
 	<classpathentry kind="lib" path="C:/Users/Nils/Desktop/bpermissions.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Nils/Desktop/Vault.jar"/>
-	<classpathentry kind="lib" path="F:/Downloads/bukkit-1.2.4-R0.1-20120323.055539-8.jar"/>
+	<classpathentry kind="lib" path="F:/Downloads/bukkit-1.2.5-R1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

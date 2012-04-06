@@ -17,6 +17,7 @@ import org.bukkit.util.Vector;
 
 import de.callmepain.SPL.CommandCore.CommandCore;
 import de.callmepain.SPL.Listener.SPLBlockDamage;
+import de.callmepain.SPL.Listener.SPLBlockExplode;
 import de.callmepain.SPL.Listener.SPLBlockListener;
 import de.callmepain.SPL.Listener.SPLLeaveJoinListener;
 import de.callmepain.SPL.Listener.SPLPlayerInteractListener;
@@ -33,6 +34,7 @@ public class SPL extends JavaPlugin {
 	public SPLConfig Config;
 	private SPLCommandExecutor CommandExe;
 	public SPLBlockDamage BlockDamage;
+	public SPLBlockExplode BlockExplode;
 	public Timer1 T1;
 	public Timer2 T2;
 	public Timer3 T3;
@@ -87,6 +89,7 @@ public class SPL extends JavaPlugin {
 		Config = new SPLConfig(this);
 		LeaveJoinListener = new SPLLeaveJoinListener(this);
 		BlockDamage = new SPLBlockDamage(this);
+		BlockExplode = new SPLBlockExplode(this);
 		T1 = new Timer1(this);
 		T2 = new Timer2(this);
 		T3 = new Timer3(this);
@@ -102,6 +105,7 @@ public class SPL extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(Config, this);
 		getServer().getPluginManager().registerEvents(LeaveJoinListener, this);
 		getServer().getPluginManager().registerEvents(BlockDamage, this);
+		getServer().getPluginManager().registerEvents(BlockExplode, this);
 		getCommand("Spleef").setExecutor(cmdc);
 		getCommand("SPL").setExecutor(CommandExe);
 		getCommand("SPLAdmin").setExecutor(CommandExe);
