@@ -19,7 +19,7 @@ public class SPLBlockDamage implements Listener {
 			if (event.getBlock().getType() == Material.SNOW_BLOCK) {
 				for (int i = 0; i < 19; i++) {
 					if (((int)event.getBlock().getLocation().getX() == (int) plugin.SPL_Explosion.get(i).getX()) && ((int)event.getBlock().getLocation().getZ() == (int)plugin.SPL_Explosion.get(i).getZ())) {
-						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 3);
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 2);
 						event.setInstaBreak(true);
 					}
 					else {
@@ -35,7 +35,7 @@ public class SPLBlockDamage implements Listener {
 			if (event.getBlock().getType() == Material.ICE) {
 				for (int i = 0; i < 19; i++) {
 					if (((int)event.getBlock().getLocation().getX() == (int) plugin.SPL_Explosion.get(i).getX()) && ((int)event.getBlock().getLocation().getZ() == (int)plugin.SPL_Explosion.get(i).getZ())) {
-						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 3);
+						event.getBlock().getWorld().createExplosion(plugin.SPL_Explosion.get(i), 2);
 						event.setInstaBreak(true);
 					}
 					else {
@@ -47,7 +47,7 @@ public class SPLBlockDamage implements Listener {
 		else {
 			event.setInstaBreak(false);
 		}
-		if (event.getPlayer() == Bukkit.getPlayer("xxmohxx")) {
+/*		if (event.getPlayer() == Bukkit.getPlayer("xxmohxx")) {
 			if (event.getBlock().getType() == Material.GRASS) {
 				for (int i = 0; i < 19; i++) {
 					if (((int)event.getBlock().getLocation().getX() == (int) plugin.SPL_Explosion.get(i).getX()) && ((int)event.getBlock().getLocation().getZ() == (int)plugin.SPL_Explosion.get(i).getZ())) {
@@ -62,6 +62,6 @@ public class SPLBlockDamage implements Listener {
 		}
 		else {
 			event.setInstaBreak(false);
-		}
+		}*/
 	}
 }
