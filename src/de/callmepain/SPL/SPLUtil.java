@@ -73,6 +73,12 @@ public class SPLUtil {
 	}
 	public static ItemStack SPLItem() {
 		Random rnd = new Random();
+		Random rnd2 = new Random();
+		Random rnd3 = new Random();
+		Random rnd4 = new Random();
+		Random rnd5 = new Random();
+		Random rnd6 = new Random();
+		Random rnd7 = new Random();
 		ItemStack item = new ItemStack(Material.BLAZE_ROD);
 		int max64 = 0;
 		int max32 = 0;
@@ -87,31 +93,31 @@ public class SPLUtil {
 			}
 		}
 		for (int i = 0; i < 23; i++) {
-			max5y2 = rnd.nextInt(5);
+			max5y2 = rnd2.nextInt(5);
 			if (max5y2 <= 1) {
 				max5y2 = 1;
 			}
 		}
 		for (int i = 0; i < 14; i++) {
-			max5y3 = rnd.nextInt(5);
+			max5y3 = rnd3.nextInt(5);
 			if (max5y3 <= 1) {
 				max5y3 = 1;
 			}
 		}
 		for (int i = 0; i < 7; i++) {
-			max16 = rnd.nextInt(16);
+			max16 = rnd4.nextInt(16);
 			if (max16 <= 5) {
 				max16 = 5;
 			}
 		}
 		for (int i = 0; i < 9; i++) {
-			max32 = rnd.nextInt(32);
+			max32 = rnd5.nextInt(32);
 			if (max32 <= 16) {
 				max32 = 16;
 			}
 		}
 		for (int i = 0; i < 13; i++) {
-			max64 = rnd.nextInt(64);
+			max64 = rnd6.nextInt(64);
 			if (max64 <= 32) {
 				max64 = 32;
 			}
@@ -146,7 +152,7 @@ public class SPLUtil {
 		SPL_Item.put(19, new ItemStack(Material.IRON_BLOCK, 1));
 		SPL_Item.put(3001, new ItemStack(Material.EXP_BOTTLE, max5y1));
 		for (int i = 0; i < 14; i++) {
-			int x = rnd.nextInt(28);
+			int x = rnd7.nextInt(28);
 			if (x < 1) {
 				item = SPL_Item.get(1);
 			}
@@ -158,6 +164,8 @@ public class SPLUtil {
 	}
 	public static ItemStack SPLItemSmall() {
 		Random rnd = new Random();
+		Random rnd2 = new Random();
+		Random rnd3 = new Random();
 		ItemStack item = new ItemStack(Material.BLAZE_ROD);
 		int max5y1 = 0;
 		int max5y2 = 0;
@@ -168,7 +176,7 @@ public class SPLUtil {
 			}
 		}
 		for (int i = 0; i < 23; i++) {
-			max5y2 = rnd.nextInt(5);
+			max5y2 = rnd2.nextInt(5);
 			if (max5y2 <= 1) {
 				max5y2 = 1;
 			}
@@ -185,7 +193,7 @@ public class SPLUtil {
 		SPL_Item.put(8, new ItemStack(Material.ENDER_PEARL, max5y2));
 		SPL_Item.put(10, new ItemStack(Material.ARROW, max5y2));
 		for (int i = 0; i < 14; i++) {
-			int x = rnd.nextInt(10);
+			int x = rnd3.nextInt(10);
 			if (x < 1) {
 				item = SPL_Item.get(1);
 			}
