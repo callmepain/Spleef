@@ -73,6 +73,5 @@ public class SPLPlayer {
 	}
 	public void reset(SPL instance) {
 		instance.SPL_Player = new SPLPlayer();
-		SPL_Quite = null;
 	}
 }
