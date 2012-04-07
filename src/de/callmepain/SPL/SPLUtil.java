@@ -399,14 +399,14 @@ public class SPLUtil {
 		plugin.getServer().broadcastMessage(args);
 	}
 	public void SPLTimerReset() {
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId1);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId2);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskid3);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskidfight);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskidstart);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskidclose);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskId1);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskId2);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskid3);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidfight);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidstart);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidclose);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidplayeringame);
+		plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidleave);
 	}
 	public void SPLGateChange(boolean co) {
 		if (!co) {

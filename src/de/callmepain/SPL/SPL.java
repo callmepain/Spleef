@@ -33,14 +33,7 @@ public class SPL extends JavaPlugin {
 	private SPLCommandExecutor CommandExe;
 	public SPLBlockDamage BlockDamage;
 	public SPLBlockExplode BlockExplode;
-	public Timer1 T1;
-	public Timer2 T2;
-	public Timer3 T3;
-	public TimerFight TFight;
-	public TimerStart TStart;
-	public TimerClose TClose;
-	public TimerLeave TLeave;
-	public TimerPlayeringame TPig;
+
 	private SpleefCommand splcmd;
 	public SPLUtil Util;
 	public SPLPlayer SPL_Player;
@@ -66,14 +59,6 @@ public class SPL extends JavaPlugin {
 	public ChatColor Chatitem = ChatColor.LIGHT_PURPLE;
 	public ChatColor Chatsiege = ChatColor.AQUA;
 	public ChatColor Chaterr = ChatColor.RED;
-	public int taskId1 = 0;
-	public int taskId2 = 0;
-	public int taskid3 = 0;
-	public int taskidfight = 0;
-	public int taskidstart = 0;
-	public int taskidclose = 0;
-	public int taskidleave = 0;
-	public int taskidplayeringame = 0;
 	
 	public join SPL_Join;
 	public leave SPL_Leave;
@@ -97,14 +82,6 @@ public class SPL extends JavaPlugin {
 		JoinListener = new SPLJoinListener(this);
 		BlockDamage = new SPLBlockDamage(this);
 		BlockExplode = new SPLBlockExplode(this);
-		T1 = new Timer1(this);
-		T2 = new Timer2(this);
-		T3 = new Timer3(this);
-		TFight = new TimerFight(this);
-		TStart = new TimerStart(this);
-		TClose = new TimerClose(this);
-		TPig = new TimerPlayeringame(this);
-		TLeave = new TimerLeave(this);
 		
 		splcmd = new SpleefCommand(this);
 		getServer().getPluginManager().registerEvents(PlayerMoveListener, this);

@@ -10,12 +10,7 @@ public class TimerStart implements Runnable {
 	@Override
 	public void run() {
 		if (!plugin.SPL_State.get("game")) {
-			plugin.getServer().getScheduler().cancelTask(plugin.taskId1);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskId2);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskid3);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskidfight);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskidstart);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskidclose);
+			plugin.Util.SPLTimerReset();
 		}
 		else {
 			plugin.Util.SPLGateChange(false);

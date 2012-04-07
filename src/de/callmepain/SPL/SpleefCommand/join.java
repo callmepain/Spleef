@@ -36,8 +36,8 @@ public class join {
 			plugin.SPL_Player.setPlayer1(player);
 			player.teleport(plugin.SPL_Spawn.get("Spawn1"));
 			plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die " + plugin.Chatitem + "Spleef Arena v." +  plugin.getDescription().getVersion() + plugin.Chattext + " betreten ");
-			plugin.taskidleave = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TLeave, 600L);
-			plugin.taskidplayeringame = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, plugin.TPig, 1200L, 1200L);
+			plugin.SPL_Timer.taskidleave = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.TLeave, 600L);
+			plugin.SPL_Timer.taskidplayeringame = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, plugin.SPL_Timer.TPig, 1200L, 1200L);
 			plugin.SPL_State.put("game", true);
 			return true;
 		}
@@ -49,14 +49,14 @@ public class join {
 				plugin.SPL_Player.setPlayer2(player);
 				player.teleport(plugin.SPL_Spawn.get("Spawn2"));
 				plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "]");
-				plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
-				plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
-				plugin.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T3, 40L);
-				plugin.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T2, 60L);
-				plugin.taskid3 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T1, 80L);
-				plugin.taskidfight = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TFight, 95L);
-				plugin.taskidstart = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TStart, 100L);
-				plugin.taskidclose = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TClose, 200L);
+				plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidplayeringame);
+				plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidleave);
+				plugin.SPL_Timer.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.T3, 40L);
+				plugin.SPL_Timer.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.T2, 60L);
+				plugin.SPL_Timer.taskid3 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.T1, 80L);
+				plugin.SPL_Timer.taskidfight = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.TFight, 95L);
+				plugin.SPL_Timer.taskidstart = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.TStart, 100L);
+				plugin.SPL_Timer.taskidclose = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.SPL_Timer.TClose, 200L);
 				plugin.SPL_State.put("running", true);
 				return true;
 			}

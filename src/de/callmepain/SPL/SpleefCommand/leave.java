@@ -28,7 +28,7 @@ public class leave {
 					}
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die Arena verlassen...");
 					plugin.Util.SPLGateChange(true);
-					plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
+					plugin.getServer().getScheduler().cancelTask(plugin.SPL_Timer.taskidplayeringame);
 					plugin.SPL_Player.reset(plugin);
 					return true;
 				}
