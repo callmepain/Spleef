@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
 import de.callmepain.SPL.SPL;
-import de.callmepain.SPL.SPLIO;
 import de.callmepain.SPL.SPLUtil;
 
 public class SPLPlayerMoveListener implements Listener {
@@ -28,89 +27,91 @@ public class SPLPlayerMoveListener implements Listener {
 	@EventHandler(priority = EventPriority.LOW)
 	public void PlayerMoveEnd(PlayerMoveEvent event) {
 		if ((plugin.SPL_State.get("game")) && (plugin.SPL_State.get("running"))) {
-			if (event.getPlayer().getName() == plugin.SPL_Player.get("1").getName()) {
+			if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer1().getName()) {
 				if (SPLUtil.checkY(event.getPlayer().getLocation(), plugin.SPL_Bg.get("Loc1"))) {
-					if (plugin.SPL_Playerscore.get(plugin.SPL_Player.get("2").getName()) == null) {
-						plugin.SPL_Playerscore.put(plugin.SPL_Player.get("2").getName(), 1);
-					}
-					else {
-						int i = plugin.SPL_Playerscore.get(plugin.SPL_Player.get("2").getName());
-						i++;
-						plugin.SPL_Playerscore.put(plugin.SPL_Player.get("2").getName(), i);
-					}
-					SPLIO.saveHash(plugin.SPL_Playerscore, plugin.log);
+					int i = plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2());
+					i++;
+					plugin.SPL_Player.setPlayerScore(plugin.SPL_Player.getPlayer2(), i);
+						
 					ItemStack item = SPLUtil.SPLItem();
 					ItemStack itemsmall = SPLUtil.SPLItemSmall();
-					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("2").getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Playerscore.get(plugin.SPL_Player.get("2").getName())) + "] Siege" + plugin.Chattext + " hat gewonnen");
-					plugin.SPL_Player.get("2").sendMessage(plugin.Chattext + "du erhälst:");
-					plugin.SPL_Player.get("2").sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
-					plugin.SPL_Player.get("2").sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
-					plugin.SPL_Player.get("1").sendMessage(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Playerscore.get(plugin.SPL_Player.get("1").getName())) + "] Siege" + plugin.Chattext + " hat verloren und erhält:");
-					plugin.SPL_Player.get("1").sendMessage(plugin.Chatitem + String.valueOf(itemsmall.getAmount()) + " * " + itemsmall.getType().name());
-					plugin.SPL_Player.get("2").getInventory().addItem(item);
-					plugin.SPL_Player.get("2").getInventory().addItem(SPLUtil.SPL_Item.get(3001));
 					
-					plugin.SPL_Player.get("1").getInventory().addItem(itemsmall);
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
 					
-					plugin.Util.SPL_End();
-					plugin.SPL_Player.get("1").teleport(plugin.SPL_Spawn.get("Despawn2"));
-					plugin.SPL_Player.get("2").teleport(plugin.SPL_Spawn.get("Despawn1"));
-					plugin.SPL_Player.put("1", null);
-					plugin.SPL_Player.put("2", null);
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat verloren und erhält:");
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(itemsmall.getAmount()) + " * " + itemsmall.getType().name());
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat verloren und erhält:");
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(itemsmall.getAmount()) + " * " + itemsmall.getType().name());
+					
+					plugin.SPL_Player.getPlayer2().getInventory().addItem(item);
+					plugin.SPL_Player.getPlayer2().getInventory().addItem(SPLUtil.SPL_Item.get(3001));
+					plugin.SPL_Player.getPlayer1().getInventory().addItem(itemsmall);
+					
+					plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn2"));
+					plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn1"));
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 					plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
+					plugin.Util.SPL_End();
+					plugin.SPL_Player.reset(plugin);
 				}
 			}
-			else if (event.getPlayer().getName() == plugin.SPL_Player.get("2").getName()) {
+			else if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer2().getName()) {
 			if (SPLUtil.checkY(event.getPlayer().getLocation(), plugin.SPL_Bg.get("Loc1"))) {
-					if (plugin.SPL_Playerscore.get(plugin.SPL_Player.get("1").getName()) == null) {
-						plugin.SPL_Playerscore.put(plugin.SPL_Player.get("1").getName(), 1);
-					}
-					else {
-						int i = plugin.SPL_Playerscore.get(plugin.SPL_Player.get("1").getName());
-						i++;
-						plugin.SPL_Playerscore.put(plugin.SPL_Player.get("1").getName(), i);
-					}
-					SPLIO.saveHash(plugin.SPL_Playerscore, plugin.log);
+					int i = plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1());
+					i++;
+					plugin.SPL_Player.setPlayerScore(plugin.SPL_Player.getPlayer1(), i);
+
 					ItemStack item = SPLUtil.SPLItem();
 					ItemStack itemsmall = SPLUtil.SPLItemSmall();
-					plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Playerscore.get(plugin.SPL_Player.get("1").getName())) + "] Siege" + plugin.Chattext + " hat gewonnen");
-					plugin.SPL_Player.get("1").sendMessage(plugin.Chattext + "du erhälst:");
-					plugin.SPL_Player.get("1").sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
-					plugin.SPL_Player.get("1").sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
-					plugin.SPL_Player.get("2").sendMessage(plugin.Chatplayer + plugin.SPL_Player.get("2").getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Playerscore.get(plugin.SPL_Player.get("2").getName())) + "] Siege" + plugin.Chattext + " hat verloren und erhält:");
-					plugin.SPL_Player.get("2").sendMessage(plugin.Chatitem + String.valueOf(itemsmall.getAmount()) + " * " + itemsmall.getType().name());
-					plugin.SPL_Player.get("1").getInventory().addItem(item);
-					plugin.SPL_Player.get("1").getInventory().addItem(SPLUtil.SPL_Item.get(3001));
-					plugin.SPL_Player.get("2").getInventory().addItem(itemsmall);
 					
-					plugin.Util.SPL_End();
-					plugin.SPL_Player.get("1").teleport(plugin.SPL_Spawn.get("Despawn2"));
-					plugin.SPL_Player.get("2").teleport(plugin.SPL_Spawn.get("Despawn1"));
-					plugin.SPL_Player.put("1", null);
-					plugin.SPL_Player.put("2", null);
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "] Siege" + plugin.Chattext + " hat gewonnen und erhält:");
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(item.getAmount()) + " * " + item.getType().name());
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(SPLUtil.SPL_Item.get(3001).getAmount()) + " * " + SPLUtil.SPL_Item.get(3001).getType().name());
+					
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat verloren und erhält:");
+					plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chatitem + String.valueOf(itemsmall.getAmount()) + " * " + itemsmall.getType().name());
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + plugin.Chatsiege + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "] Siege" + plugin.Chattext + " hat verloren und erhält:");
+					plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chatitem + String.valueOf(itemsmall.getAmount()) + " * " + itemsmall.getType().name());
+					
+					plugin.SPL_Player.getPlayer1().getInventory().addItem(item);
+					plugin.SPL_Player.getPlayer1().getInventory().addItem(SPLUtil.SPL_Item.get(3001));
+					plugin.SPL_Player.getPlayer2().getInventory().addItem(itemsmall);
+					
+					plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn2"));
+					plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn1"));
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 					SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 					plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
+					plugin.Util.SPL_End();
+					plugin.SPL_Player.reset(plugin);
 				}
 			}
 		}
 	}
 	@EventHandler(priority = EventPriority.LOW)
 	public void PlayerMoveStart(PlayerMoveEvent event) {
-		if (plugin.SPL_Player.get("1") != null) {
+		if (plugin.SPL_Player.getPlayer1() != null) {
 			if ((plugin.SPL_State.get("game")) && (!plugin.SPL_State.get("running"))) {
-				if (event.getPlayer().getName() == plugin.SPL_Player.get("1").getName()) {
+				if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer1().getName()) {
 					if (!SPLUtil.checkCuboid(event.getPlayer().getLocation(),plugin.SPL_SpawnRoom.get("SpawnRoom1loc1"),plugin.SPL_SpawnRoom.get("SpawnRoom1loc2"))) {
-						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + plugin.Chattext + " hat die Arena verlassen!");
-						plugin.Util.SPL_End();
-						plugin.SPL_Player.put("1", null);
-						plugin.SPL_Player.put("2", null);
+						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + plugin.Chattext + " hat die Arena verlassen!");
+						plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn1"));
+						plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chaterr + "Du sollst " + plugin.Chatitem + "/spl leave " + plugin.Chaterr + "nutzen um die Arena zu verlassen!");
 						SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 						SPLUtil.fillgate(event.getPlayer().getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
 						plugin.Util.fill(event.getPlayer().getWorld(), plugin.SPL_Bgendid);
 						plugin.Util.SPLTimerReset();
+						plugin.Util.SPL_End();
+						plugin.SPL_Player.reset(plugin);
 					}
 				}
 			}
@@ -119,8 +120,8 @@ public class SPLPlayerMoveListener implements Listener {
 	@EventHandler(priority = EventPriority.LOW)
 	public void WrongPlayer(PlayerMoveEvent event) {
 		if (plugin.SPL_State.get("game")) {
-			if ((plugin.SPL_Player.get("1") != null) && (plugin.SPL_Player.get("2") != null)) {
-				if ((event.getPlayer().getName() == plugin.SPL_Player.get("1").getName()) || (event.getPlayer().getName() == plugin.SPL_Player.get("2").getName())) {
+			if ((plugin.SPL_Player.getPlayer1() != null) && (plugin.SPL_Player.getPlayer2() != null)) {
+				if ((event.getPlayer().getName() == plugin.SPL_Player.getPlayer1().getName()) || (event.getPlayer().getName() == plugin.SPL_Player.getPlayer2().getName())) {
 						return;
 					}
 				else {
@@ -131,8 +132,8 @@ public class SPLPlayerMoveListener implements Listener {
 					}
 				}
 			}
-			else if (plugin.SPL_Player.get("1") != null) {
-				if (event.getPlayer().getName() == plugin.SPL_Player.get("1").getName()) {
+			else if (plugin.SPL_Player.getPlayer1() != null) {
+				if (event.getPlayer().getName() == plugin.SPL_Player.getPlayer1().getName()) {
 					return;
 				}
 				else {

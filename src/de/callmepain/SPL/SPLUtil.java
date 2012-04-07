@@ -73,6 +73,12 @@ public class SPLUtil {
 	}
 	public static ItemStack SPLItem() {
 		Random rnd = new Random();
+		Random rnd2 = new Random();
+		Random rnd3 = new Random();
+		Random rnd4 = new Random();
+		Random rnd5 = new Random();
+		Random rnd6 = new Random();
+		Random rnd7 = new Random();
 		ItemStack item = new ItemStack(Material.BLAZE_ROD);
 		int max64 = 0;
 		int max32 = 0;
@@ -87,31 +93,31 @@ public class SPLUtil {
 			}
 		}
 		for (int i = 0; i < 23; i++) {
-			max5y2 = rnd.nextInt(5);
+			max5y2 = rnd2.nextInt(5);
 			if (max5y2 <= 1) {
 				max5y2 = 1;
 			}
 		}
 		for (int i = 0; i < 14; i++) {
-			max5y3 = rnd.nextInt(5);
+			max5y3 = rnd3.nextInt(5);
 			if (max5y3 <= 1) {
 				max5y3 = 1;
 			}
 		}
 		for (int i = 0; i < 7; i++) {
-			max16 = rnd.nextInt(16);
+			max16 = rnd4.nextInt(16);
 			if (max16 <= 5) {
 				max16 = 5;
 			}
 		}
 		for (int i = 0; i < 9; i++) {
-			max32 = rnd.nextInt(32);
+			max32 = rnd5.nextInt(32);
 			if (max32 <= 16) {
 				max32 = 16;
 			}
 		}
 		for (int i = 0; i < 13; i++) {
-			max64 = rnd.nextInt(64);
+			max64 = rnd6.nextInt(64);
 			if (max64 <= 32) {
 				max64 = 32;
 			}
@@ -146,7 +152,7 @@ public class SPLUtil {
 		SPL_Item.put(19, new ItemStack(Material.IRON_BLOCK, 1));
 		SPL_Item.put(3001, new ItemStack(Material.EXP_BOTTLE, max5y1));
 		for (int i = 0; i < 14; i++) {
-			int x = rnd.nextInt(28);
+			int x = rnd7.nextInt(28);
 			if (x < 1) {
 				item = SPL_Item.get(1);
 			}
@@ -158,6 +164,8 @@ public class SPLUtil {
 	}
 	public static ItemStack SPLItemSmall() {
 		Random rnd = new Random();
+		Random rnd2 = new Random();
+		Random rnd3 = new Random();
 		ItemStack item = new ItemStack(Material.BLAZE_ROD);
 		int max5y1 = 0;
 		int max5y2 = 0;
@@ -168,7 +176,7 @@ public class SPLUtil {
 			}
 		}
 		for (int i = 0; i < 23; i++) {
-			max5y2 = rnd.nextInt(5);
+			max5y2 = rnd2.nextInt(5);
 			if (max5y2 <= 1) {
 				max5y2 = 1;
 			}
@@ -185,7 +193,7 @@ public class SPLUtil {
 		SPL_Item.put(8, new ItemStack(Material.ENDER_PEARL, max5y2));
 		SPL_Item.put(10, new ItemStack(Material.ARROW, max5y2));
 		for (int i = 0; i < 14; i++) {
-			int x = rnd.nextInt(10);
+			int x = rnd3.nextInt(10);
 			if (x < 1) {
 				item = SPL_Item.get(1);
 			}
@@ -264,7 +272,7 @@ public class SPLUtil {
 		Tgfill.run();
 		Tgfill = null;
 	}
-	public static boolean SPL_Mode() {
+	private static boolean SPL_Mode() {
 		boolean bo = false;
 		Random rnd = new Random();
 		for (int i = 0; i < rnd.nextInt(35); i++) {
@@ -280,6 +288,17 @@ public class SPLUtil {
 			}
 		}
 		return bo;
+	}
+	public void SPL_ModeChange() {
+		if (SPLUtil.SPL_Mode())
+		{
+			plugin.SPL_Bgid = 79;
+			plugin.SPL_Fieldtyp = "Ice";
+		}
+		else {
+			plugin.SPL_Bgid = 80;
+			plugin.SPL_Fieldtyp = "Schnee";
+		}
 	}
 	public void SPL_End() {
 		plugin.SPL_State.put("game", false);
@@ -326,16 +345,69 @@ public class SPLUtil {
 		Tfill.run();
 		Tfill = null;
 	}
+	private void SPLRndExplosion(final World w, final int id) {
+		Thread TExplosion = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				double x1 = plugin.SPL_Bg.get("Loc1").getX();
+				double x2 = plugin.SPL_Bg.get("Loc2").getX();
+				double z1 = plugin.SPL_Bg.get("Loc1").getZ();
+				double z2 = plugin.SPL_Bg.get("Loc2").getZ();
+				double x4;
+				double z4;
+				double x3;
+				double z3;
+				if (x1 < x2) {
+					x4 =plugin.SPL_Bg.get("Loc2").getX();
+					x3 =plugin.SPL_Bg.get("Loc1").getX();
+				}
+				else {
+					x4 =plugin.SPL_Bg.get("Loc1").getX();
+					x3 =plugin.SPL_Bg.get("Loc2").getX();
+				}
+				if (z1 < z2) {
+					z4 =plugin.SPL_Bg.get("Loc2").getZ();
+					z3 =plugin.SPL_Bg.get("Loc1").getZ();
+				}
+				else {
+					z4 =plugin.SPL_Bg.get("Loc1").getZ();
+					z3 =plugin.SPL_Bg.get("Loc2").getZ();
+				}
+				double rnd = new Random().nextDouble();
+				double rnd2 = new Random().nextDouble();
+				double resultx = x4 + (rnd * (x3 - x4));
+				double resultz = z4 + (rnd2 * (z3 - z4));
+				plugin.SPL_Explosion.put(id, new Location(w, resultx, plugin.SPL_Bg.get("Loc1").getY(), resultz));
+			}
+		});
+		TExplosion.run();
+		TExplosion = null;
+	}
+	public void SPLExplosion(final World w, final int id) {
+		Thread TExplosion = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for(int i = 0; i < 19; i++) {
+					SPLRndExplosion(w, i);
+					Block btc = w.getBlockAt(plugin.SPL_Explosion.get(i));
+					btc.setTypeId(id);
+				}
+			}
+		});
+		TExplosion.run();
+		TExplosion = null;
+	}
 	public void SPLBroadcast(String args) {
 		plugin.getServer().broadcastMessage(args);
 	}
 	public void SPLTimerReset() {
 		plugin.getServer().getScheduler().cancelTask(plugin.taskId1);
 		plugin.getServer().getScheduler().cancelTask(plugin.taskId2);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId3);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId4);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId5);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId6);
-		plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskid3);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidfight);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidstart);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidclose);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
+		plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
 	}
 }

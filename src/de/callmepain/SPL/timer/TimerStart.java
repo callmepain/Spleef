@@ -12,10 +12,10 @@ public class TimerStart implements Runnable {
 		if (!plugin.SPL_State.get("game")) {
 			plugin.getServer().getScheduler().cancelTask(plugin.taskId1);
 			plugin.getServer().getScheduler().cancelTask(plugin.taskId2);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskId3);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskId4);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskId5);
-			plugin.getServer().getScheduler().cancelTask(plugin.taskId6);
+			plugin.getServer().getScheduler().cancelTask(plugin.taskid3);
+			plugin.getServer().getScheduler().cancelTask(plugin.taskidfight);
+			plugin.getServer().getScheduler().cancelTask(plugin.taskidstart);
+			plugin.getServer().getScheduler().cancelTask(plugin.taskidclose);
 		}
 		else {
 			plugin.SPL_Block.put("11", plugin.SPL_Spawn.get("Spawn1").getWorld().getBlockAt(plugin.SPL_Gate.get("Gate1Loc1")));

@@ -11,13 +11,13 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import de.callmepain.SPL.CommandCore.CommandCore;
 import de.callmepain.SPL.Listener.SPLBlockDamage;
+import de.callmepain.SPL.Listener.SPLBlockExplode;
 import de.callmepain.SPL.Listener.SPLBlockListener;
 import de.callmepain.SPL.Listener.SPLLeaveJoinListener;
 import de.callmepain.SPL.Listener.SPLPlayerInteractListener;
@@ -26,7 +26,7 @@ import de.callmepain.SPL.timer.*;
 
 
 public class SPL extends JavaPlugin {
-	public Logger log = Logger.getLogger("Minecraft");
+	public static Logger log = Logger.getLogger("Minecraft");
 	public SPLPlayerMoveListener PlayerMoveListener;
 	public SPLBlockListener BlockListener;
 	public SPLPlayerInteractListener PlayerInteractListener;
@@ -34,30 +34,33 @@ public class SPL extends JavaPlugin {
 	public SPLConfig Config;
 	private SPLCommandExecutor CommandExe;
 	public SPLBlockDamage BlockDamage;
+	public SPLBlockExplode BlockExplode;
 	public Timer1 T1;
 	public Timer2 T2;
 	public Timer3 T3;
 	public TimerFight TFight;
 	public TimerStart TStart;
 	public TimerClose TClose;
+	public TimerLeave TLeave;
 	public TimerPlayeringame TPig;
 	public static Economy economy = null;
 	private CommandCore cmdc;
 	public SPLUtil Util;
+	public SPLPlayer SPL_Player;
+	
 	
 	public FileConfiguration config;
 	public int SPL_SelTool;
 	public double SPL_Einsatz;
 	public boolean SPL_hasEinsatz;
 	public HashMap<String, Location> SPL_Sel = new HashMap<String, Location>();
+	public HashMap<Integer, Location> SPL_Explosion = new HashMap<Integer, Location>();
 	public HashMap<String, Vector> SPL_SpawnRoom = new HashMap<String, Vector>();
 	public HashMap<String, Vector> SPL_Bg = new HashMap<String, Vector>();
 	public HashMap<String, Vector> SPL_Arena = new HashMap<String, Vector>();
 	public HashMap<String, Location> SPL_Spawn = new HashMap<String, Location>();
 	public Map<String, Location> SPL_Gate = new HashMap<String, Location>();
 	public HashMap<String, Boolean> SPL_State = new HashMap<String, Boolean>();
-	public HashMap<String, Player> SPL_Player = new HashMap<String, Player>();
-	public HashMap<String, Integer> SPL_Playerscore = new HashMap<String, Integer>();
 	public HashMap<String, Block> SPL_Block = new HashMap<String, Block>();
 	public int SPL_Bgid;
 	public int SPL_Bgendid;
@@ -70,13 +73,15 @@ public class SPL extends JavaPlugin {
 	public String SPL_Fieldtyp = "Schnee";
 	public int taskId1 = 0;
 	public int taskId2 = 0;
-	public int taskId3 = 0;
-	public int taskId4 = 0;
-	public int taskId5 = 0;
-	public int taskId6 = 0;
-	public int taskId7 = 0;
+	public int taskid3 = 0;
+	public int taskidfight = 0;
+	public int taskidstart = 0;
+	public int taskidclose = 0;
+	public int taskidleave = 0;
+	public int taskidplayeringame = 0;
 	
 	public void onEnable() {
+		SPL_Player = new SPLPlayer();
 		Util = new SPLUtil(this);
 		config = this.getConfig();
 		PlayerMoveListener = new SPLPlayerMoveListener(this);
@@ -86,6 +91,7 @@ public class SPL extends JavaPlugin {
 		Config = new SPLConfig(this);
 		LeaveJoinListener = new SPLLeaveJoinListener(this);
 		BlockDamage = new SPLBlockDamage(this);
+		BlockExplode = new SPLBlockExplode(this);
 		T1 = new Timer1(this);
 		T2 = new Timer2(this);
 		T3 = new Timer3(this);
@@ -93,6 +99,7 @@ public class SPL extends JavaPlugin {
 		TStart = new TimerStart(this);
 		TClose = new TimerClose(this);
 		TPig = new TimerPlayeringame(this);
+		TLeave = new TimerLeave(this);
 		
 		cmdc = new CommandCore(this);
 		getServer().getPluginManager().registerEvents(PlayerMoveListener, this);
@@ -101,6 +108,7 @@ public class SPL extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(Config, this);
 		getServer().getPluginManager().registerEvents(LeaveJoinListener, this);
 		getServer().getPluginManager().registerEvents(BlockDamage, this);
+		getServer().getPluginManager().registerEvents(BlockExplode, this);
 		getCommand("Spleef").setExecutor(cmdc);
 		getCommand("SPL").setExecutor(CommandExe);
 		getCommand("SPLAdmin").setExecutor(CommandExe);
@@ -118,7 +126,6 @@ public class SPL extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
 		}
-		SPLIO.loadHash(SPL_Playerscore, log);
 		System.out.println(toString() + " enabled");
         log.info("Your plugin has been enabled.");       
 	}

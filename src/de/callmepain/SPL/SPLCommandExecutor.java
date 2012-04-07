@@ -45,8 +45,8 @@ public class SPLCommandExecutor implements CommandExecutor {
 				player.sendMessage(plugin.Chattext + "reload complete");
 				return true;
 			}
-			else if (args[0].equalsIgnoreCase("top")) {
-								
+			else if (args[0].equalsIgnoreCase("test")) {
+				plugin.Util.SPLExplosion(w, 2);
 			}
 			else if (args[0].equalsIgnoreCase("join")) {
 				if (!player.hasPermission("spl.join")) {
@@ -62,46 +62,33 @@ public class SPLCommandExecutor implements CommandExecutor {
 					return true;
 				}
 				if(!plugin.SPL_State.get("game")) {
-					if (SPLUtil.SPL_Mode())
-					{
-						plugin.SPL_Bgid = 79;
-						plugin.SPL_Fieldtyp = "Ice";
-					}
-					else {
-						plugin.SPL_Bgid = 80;
-						plugin.SPL_Fieldtyp = "Schnee";
-					}
+					plugin.Util.SPL_ModeChange();
 					SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 					SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
-					plugin.SPL_Player.put("1", player);
-					if (plugin.SPL_Playerscore.get(plugin.SPL_Player.get("1").getName()) == null) {
-						plugin.SPL_Playerscore.put(plugin.SPL_Player.get("1").getName(), 0);
-					}
+					plugin.SPL_Player.setPlayer1(player);
 					player.teleport(plugin.SPL_Spawn.get("Spawn1"));
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die " + plugin.Chatitem + "Spleef Arena v." +  plugin.getDescription().getVersion() + plugin.Chattext + " betreten ");
-					player.sendMessage(plugin.Chattext + "sollte sich kein Gegner finden gib " + plugin.Chatitem + "/spl leave" + plugin.Chattext + " ein");
-					plugin.taskId7 = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, plugin.TPig, 1200L, 1200L);
+					plugin.taskidleave = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TLeave, 600L);
+					plugin.taskidplayeringame = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, plugin.TPig, 1200L, 1200L);
 					plugin.SPL_State.put("game", true);
 					return true;
 				}
 				else if ((plugin.SPL_State.get("game")) && (!plugin.SPL_State.get("running"))) {
-					if (plugin.SPL_Player.get("1").getName() == player.getName()) {
+					if (plugin.SPL_Player.getPlayer1().getName() == player.getName()) {
 						player.sendMessage(plugin.Chattext + "Du kannst nicht gegen dich selber antreten...");
 					}
 					else {
-						plugin.SPL_Player.put("2", player);
-						if (plugin.SPL_Playerscore.get(plugin.SPL_Player.get("2").getName()) == null) {
-							plugin.SPL_Playerscore.put(plugin.SPL_Player.get("2").getName(), 0);
-						}
+						plugin.SPL_Player.setPlayer2(player);
 						player.teleport(plugin.SPL_Spawn.get("Spawn2"));
-						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.get("1").getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Playerscore.get(plugin.SPL_Player.get("1").getName())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.get("2").getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Playerscore.get(plugin.SPL_Player.get("2").getName())) + "]");
-						plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
-						plugin.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T3, 140L);
-						plugin.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T2, 160L);
-						plugin.taskId3 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T1, 180L);
-						plugin.taskId4 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TFight, 195L);
-						plugin.taskId5 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TStart, 200L);
-						plugin.taskId6 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TClose, 300L);
+						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "]");
+						plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
+						plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
+						plugin.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T3, 40L);
+						plugin.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T2, 60L);
+						plugin.taskid3 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T1, 80L);
+						plugin.taskidfight = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TFight, 95L);
+						plugin.taskidstart = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TStart, 100L);
+						plugin.taskidclose = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TClose, 200L);
 						plugin.SPL_State.put("running", true);
 						return true;
 					}
@@ -110,17 +97,22 @@ public class SPLCommandExecutor implements CommandExecutor {
 			else if (args[0].equalsIgnoreCase("Leave")) {
 				if (!player.hasPermission("spl.join")) {
 					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
-					plugin.getServer().getScheduler().cancelTask(plugin.taskId7);
 					return true;
 				}
 				else {
-					plugin.Util.SPL_End();
-					plugin.SPL_Player.get("1").teleport(plugin.SPL_Spawn.get("Despawn1"));
-					if (plugin.SPL_Player.get("2") != null) {
-						plugin.SPL_Player.get("2").teleport(plugin.SPL_Spawn.get("Despawn2"));
+					if ((plugin.SPL_State.get("game")) || (plugin.SPL_State.get("running"))) {
+						if ((player == plugin.SPL_Player.getPlayer1()) || (player == plugin.SPL_Player.getPlayer2())) {
+							plugin.Util.SPL_End();
+							plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn1"));
+							if (plugin.SPL_Player.getPlayer2() != null) {
+								plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn2"));
+							}
+							plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die Arena verlassen...");
+							plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
+							plugin.SPL_Player.reset(plugin);
+							return true;
+						}
 					}
-					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die Arena verlassen...");
-					return true;
 				}
 			}
 		}

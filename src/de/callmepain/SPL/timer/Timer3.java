@@ -14,8 +14,8 @@ public class Timer3 implements Runnable{
 		}
 		else {
 			plugin.Util.fill(plugin.SPL_Spawn.get("Spawn1").getWorld(), 57);
-			plugin.SPL_Player.get("1").sendMessage(plugin.Chattext + "3");
-			plugin.SPL_Player.get("2").sendMessage(plugin.Chattext + "3");
+			plugin.SPL_Player.getPlayer1().sendMessage(plugin.Chattext + "3");
+			plugin.SPL_Player.getPlayer2().sendMessage(plugin.Chattext + "3");
 		}
 	}
 
