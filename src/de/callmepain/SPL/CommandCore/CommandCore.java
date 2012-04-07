@@ -12,13 +12,18 @@ public class CommandCore implements CommandExecutor{
 		plugin = instance;
 	}
 	private basic bsc = new basic();
-	private join jn = new join(plugin);
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
 			return bsc.welcome(sender, cmd, label, args);
 		}
 		else if (args[0].equalsIgnoreCase("join")) {
-			return jn.SPLJoin(sender, cmd, label, args);
+			return plugin.SPL_Join.SPLJoin(sender, cmd, label, args);
+		}
+		else if (args[0].equalsIgnoreCase("leave")) {
+			return plugin.SPL_Leave.SPLLeave(sender, cmd, label, args);
+		}
+		else if (args[0].equalsIgnoreCase("reload")) {
+			return plugin.SPL_Reload.SPLReload(sender, cmd, label, args);
 		}
 		return false;
 	}

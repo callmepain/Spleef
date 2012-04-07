@@ -15,7 +15,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-import de.callmepain.SPL.CommandCore.CommandCore;
+import de.callmepain.SPL.CommandCore.*;
 import de.callmepain.SPL.Listener.SPLBlockDamage;
 import de.callmepain.SPL.Listener.SPLBlockExplode;
 import de.callmepain.SPL.Listener.SPLBlockListener;
@@ -80,7 +80,14 @@ public class SPL extends JavaPlugin {
 	public int taskidleave = 0;
 	public int taskidplayeringame = 0;
 	
+	public join SPL_Join;
+	public leave SPL_Leave;
+	public reload SPL_Reload;
+	
 	public void onEnable() {
+		SPL_Reload = new reload(this);
+		SPL_Leave = new leave(this);
+		SPL_Join = new join(this);
 		SPL_Player = new SPLPlayer();
 		Util = new SPLUtil(this);
 		config = this.getConfig();

@@ -1,9 +1,7 @@
 package de.callmepain.SPL;
 
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,7 +22,6 @@ public class SPLCommandExecutor implements CommandExecutor {
 		else {
 			sender.sendMessage(ChatColor.RED + "Du bist kein Spieler!");
 		}
-		final World w = player.getWorld();
 		if (command.getName().equalsIgnoreCase("SPL")) {
 			if (args.length > 1) {
 				player.sendMessage(ChatColor.RED + "Zu viele Argumente");
@@ -33,87 +30,6 @@ public class SPLCommandExecutor implements CommandExecutor {
 			else if (args.length < 1) {
 				player.sendMessage(ChatColor.RED + "Zu wenig Argumente");
 				return false;
-			}
-			if (args[0].equalsIgnoreCase("reload")) {
-				if (!player.hasPermission("spl.admin")) {
-					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
-					return true;
-				}
-				plugin.Util.SPL_End();
-				plugin.Util.fill(w, plugin.SPL_Bgendid);
-				plugin.Config.LoadConfig();
-				player.sendMessage(plugin.Chattext + "reload complete");
-				return true;
-			}
-			else if (args[0].equalsIgnoreCase("test")) {
-				plugin.Util.SPLExplosion(w, 2);
-			}
-			else if (args[0].equalsIgnoreCase("join")) {
-				if (!player.hasPermission("spl.join")) {
-					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
-					return true;
-				}
-				if (player.isOp()) {
-					player.sendMessage(plugin.Chattext + "als OP darfst du nicht teilnehmen weil du mir immer versehentlich die arena zerstörst!");
-					return true;
-				}
-				if (player.getGameMode() == GameMode.CREATIVE) {
-					player.sendMessage(plugin.Chattext + "im Creative modus darfst du nicht teilnehmen!");
-					return true;
-				}
-				if(!plugin.SPL_State.get("game")) {
-					plugin.Util.SPL_ModeChange();
-					SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
-					SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
-					plugin.SPL_Player.setPlayer1(player);
-					player.teleport(plugin.SPL_Spawn.get("Spawn1"));
-					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die " + plugin.Chatitem + "Spleef Arena v." +  plugin.getDescription().getVersion() + plugin.Chattext + " betreten ");
-					plugin.taskidleave = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TLeave, 600L);
-					plugin.taskidplayeringame = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, plugin.TPig, 1200L, 1200L);
-					plugin.SPL_State.put("game", true);
-					return true;
-				}
-				else if ((plugin.SPL_State.get("game")) && (!plugin.SPL_State.get("running"))) {
-					if (plugin.SPL_Player.getPlayer1().getName() == player.getName()) {
-						player.sendMessage(plugin.Chattext + "Du kannst nicht gegen dich selber antreten...");
-					}
-					else {
-						plugin.SPL_Player.setPlayer2(player);
-						player.teleport(plugin.SPL_Spawn.get("Spawn2"));
-						plugin.Util.SPLBroadcast(plugin.Chatplayer + plugin.SPL_Player.getPlayer1().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer1())) + "]" + plugin.Chattext + " vs. " + plugin.Chatplayer + plugin.SPL_Player.getPlayer2().getName() + ChatColor.AQUA + " [" + String.valueOf(plugin.SPL_Player.getPlayerScore(plugin.SPL_Player.getPlayer2())) + "]");
-						plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
-						plugin.getServer().getScheduler().cancelTask(plugin.taskidleave);
-						plugin.taskId1 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T3, 40L);
-						plugin.taskId2 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T2, 60L);
-						plugin.taskid3 = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.T1, 80L);
-						plugin.taskidfight = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TFight, 95L);
-						plugin.taskidstart = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TStart, 100L);
-						plugin.taskidclose = plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.TClose, 200L);
-						plugin.SPL_State.put("running", true);
-						return true;
-					}
-				}
-			}
-			else if (args[0].equalsIgnoreCase("Leave")) {
-				if (!player.hasPermission("spl.join")) {
-					player.sendMessage(ChatColor.RED + "Du hast keine Berechtigung diesen Befehl zu nutzen!");
-					return true;
-				}
-				else {
-					if ((plugin.SPL_State.get("game")) || (plugin.SPL_State.get("running"))) {
-						if ((player == plugin.SPL_Player.getPlayer1()) || (player == plugin.SPL_Player.getPlayer2())) {
-							plugin.Util.SPL_End();
-							plugin.SPL_Player.getPlayer1().teleport(plugin.SPL_Spawn.get("Despawn1"));
-							if (plugin.SPL_Player.getPlayer2() != null) {
-								plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn2"));
-							}
-							plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die Arena verlassen...");
-							plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
-							plugin.SPL_Player.reset(plugin);
-							return true;
-						}
-					}
-				}
 			}
 		}
 		if (command.getName().equalsIgnoreCase("SPLAdmin")) {
