@@ -293,11 +293,9 @@ public class SPLUtil {
 		if (SPLUtil.SPL_Mode())
 		{
 			plugin.SPL_Bgid = 79;
-			plugin.SPL_Fieldtyp = "Ice";
 		}
 		else {
 			plugin.SPL_Bgid = 80;
-			plugin.SPL_Fieldtyp = "Schnee";
 		}
 	}
 	public void SPL_End() {

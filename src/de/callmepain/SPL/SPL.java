@@ -4,14 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
@@ -45,16 +41,14 @@ public class SPL extends JavaPlugin {
 	public TimerClose TClose;
 	public TimerLeave TLeave;
 	public TimerPlayeringame TPig;
-	public static Economy economy = null;
 	private SpleefCommand splcmd;
 	public SPLUtil Util;
 	public SPLPlayer SPL_Player;
+	public TimerManager SPL_Timer;
 	
 	
 	public FileConfiguration config;
 	public int SPL_SelTool;
-	public double SPL_Einsatz;
-	public boolean SPL_hasEinsatz;
 	public HashMap<String, Location> SPL_Sel = new HashMap<String, Location>();
 	public HashMap<Integer, Location> SPL_Explosion = new HashMap<Integer, Location>();
 	public HashMap<String, Vector> SPL_SpawnRoom = new HashMap<String, Vector>();
@@ -72,7 +66,6 @@ public class SPL extends JavaPlugin {
 	public ChatColor Chatitem = ChatColor.LIGHT_PURPLE;
 	public ChatColor Chatsiege = ChatColor.AQUA;
 	public ChatColor Chaterr = ChatColor.RED;
-	public String SPL_Fieldtyp = "Schnee";
 	public int taskId1 = 0;
 	public int taskId2 = 0;
 	public int taskid3 = 0;
@@ -87,6 +80,8 @@ public class SPL extends JavaPlugin {
 	public reload SPL_Reload;
 	
 	public void onEnable() {
+		SPL_Timer = new TimerManager(this);
+		
 		SPL_Reload = new reload(this);
 		SPL_Leave = new leave(this);
 		SPL_Join = new join(this);
@@ -131,11 +126,6 @@ public class SPL extends JavaPlugin {
 		SPL_Bgendid = 79;
 		Config.LoadConfig();
 		
-		if (!setupEconomy()) {
-			log.info(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-		}
 		System.out.println(toString() + " enabled");
         log.info("Your plugin has been enabled.");       
 	}
@@ -143,39 +133,5 @@ public class SPL extends JavaPlugin {
 	public void onDisable() {
 		System.out.println(toString() + " disabled");
 		log.info("Your plugin has been disabled.");
-	}
-	
-	private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        economy = rsp.getProvider();
-        return economy != null;
-    }
-	public void filltop(World w, Location loc1, int id, int id2) {
-		Block b1 = w.getBlockAt((int)loc1.getX(), (int)loc1.getY() + 3, (int)loc1.getZ());
-		Block bx1 = w.getBlockAt((int)loc1.getX() + 1, (int)loc1.getY() + 3, (int)loc1.getZ());
-		Block bx2 = w.getBlockAt((int)loc1.getX() - 1, (int)loc1.getY() + 3, (int)loc1.getZ());
-		Block bz1 = w.getBlockAt((int)loc1.getX(), (int)loc1.getY() + 3, (int)loc1.getZ() + 1);
-		Block bz2 = w.getBlockAt((int)loc1.getX(), (int)loc1.getY() + 3, (int)loc1.getZ() - 1);
-		if(b1.getTypeId() == id) {
-			b1.setTypeId(id2);
-		}
-		if(bx1.getTypeId() == id2) {
-			bx1.setTypeId(id);
-		}
-		if(bx2.getTypeId() == id2) {
-			bx2.setTypeId(id);
-		}
-		if(bz1.getTypeId() == id2) {
-			bz1.setTypeId(id);
-		}
-		if(bz2.getTypeId() == id2) {
-			bz2.setTypeId(id);
-		}
 	}
 }
