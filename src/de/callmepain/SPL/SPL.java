@@ -15,13 +15,13 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-import de.callmepain.SPL.CommandCore.*;
 import de.callmepain.SPL.Listener.SPLBlockDamage;
 import de.callmepain.SPL.Listener.SPLBlockExplode;
 import de.callmepain.SPL.Listener.SPLBlockListener;
 import de.callmepain.SPL.Listener.SPLLeaveJoinListener;
 import de.callmepain.SPL.Listener.SPLPlayerInteractListener;
 import de.callmepain.SPL.Listener.SPLPlayerMoveListener;
+import de.callmepain.SPL.SpleefCommand.*;
 import de.callmepain.SPL.timer.*;
 
 
@@ -44,7 +44,7 @@ public class SPL extends JavaPlugin {
 	public TimerLeave TLeave;
 	public TimerPlayeringame TPig;
 	public static Economy economy = null;
-	private CommandCore cmdc;
+	private SpleefCommand splcmd;
 	public SPLUtil Util;
 	public SPLPlayer SPL_Player;
 	
@@ -108,7 +108,7 @@ public class SPL extends JavaPlugin {
 		TPig = new TimerPlayeringame(this);
 		TLeave = new TimerLeave(this);
 		
-		cmdc = new CommandCore(this);
+		splcmd = new SpleefCommand(this);
 		getServer().getPluginManager().registerEvents(PlayerMoveListener, this);
 		getServer().getPluginManager().registerEvents(BlockListener, this);
 		getServer().getPluginManager().registerEvents(PlayerInteractListener, this);
@@ -116,8 +116,7 @@ public class SPL extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(LeaveJoinListener, this);
 		getServer().getPluginManager().registerEvents(BlockDamage, this);
 		getServer().getPluginManager().registerEvents(BlockExplode, this);
-		getCommand("Spleef").setExecutor(cmdc);
-		getCommand("SPL").setExecutor(CommandExe);
+		getCommand("Spleef").setExecutor(splcmd);
 		getCommand("SPLAdmin").setExecutor(CommandExe);
 		SPL_SelTool = 271;
 		SPL_State.put("game", false);

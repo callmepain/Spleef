@@ -11,9 +11,7 @@ commands:
   Spleef:
     description: Spleef game command
     usage: /<command>
-  SPL:
-    description: Spleef game command
-    usage: /<command>
+    aliases: [spl]
   SPLAdmin:
     description: Spleef game command
     usage: /<command>

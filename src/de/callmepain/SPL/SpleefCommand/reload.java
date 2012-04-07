@@ -1,4 +1,4 @@
-package de.callmepain.SPL.CommandCore;
+package de.callmepain.SPL.SpleefCommand;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
