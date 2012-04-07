@@ -32,6 +32,7 @@ public class join {
 			plugin.Util.SPL_ModeChange();
 			SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 			SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
+			plugin.Util.SPLGateChange(true);
 			plugin.SPL_Player.setPlayer1(player);
 			player.teleport(plugin.SPL_Spawn.get("Spawn1"));
 			plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die " + plugin.Chatitem + "Spleef Arena v." +  plugin.getDescription().getVersion() + plugin.Chattext + " betreten ");

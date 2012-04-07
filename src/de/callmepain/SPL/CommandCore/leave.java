@@ -27,6 +27,7 @@ public class leave {
 						plugin.SPL_Player.getPlayer2().teleport(plugin.SPL_Spawn.get("Despawn2"));
 					}
 					plugin.Util.SPLBroadcast(plugin.Chatplayer + player.getName() + plugin.Chattext + " hat die Arena verlassen...");
+					plugin.Util.SPLGateChange(true);
 					plugin.getServer().getScheduler().cancelTask(plugin.taskidplayeringame);
 					plugin.SPL_Player.reset(plugin);
 					return true;

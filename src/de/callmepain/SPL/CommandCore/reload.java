@@ -23,6 +23,7 @@ public class reload {
 		}
 		plugin.Util.SPL_End();
 		plugin.Util.fill(w, plugin.SPL_Bgendid);
+		plugin.Util.SPLGateChange(true);
 		plugin.Config.LoadConfig();
 		player.sendMessage(plugin.Chattext + "reload complete");
 		return true;
