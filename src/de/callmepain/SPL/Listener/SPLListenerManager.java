@@ -1,5 +1,7 @@
 package de.callmepain.SPL.Listener;
 
+import org.bukkit.Bukkit;
+
 import de.callmepain.SPL.SPL;
 
 public class SPLListenerManager {
@@ -12,12 +14,19 @@ public class SPLListenerManager {
 	public SPLBlockExplode BlockExplode;
 	
 	public SPLListenerManager(SPL Instance) {
-		Instance.getServer().getPluginManager().registerEvents(PlayerMoveListener, Instance);
-		Instance.getServer().getPluginManager().registerEvents(BlockListener, Instance);
-		Instance.getServer().getPluginManager().registerEvents(PlayerInteractListener, Instance);
-		Instance.getServer().getPluginManager().registerEvents(LeaveListener, Instance);
-		Instance.getServer().getPluginManager().registerEvents(JoinListener, Instance);
-		Instance.getServer().getPluginManager().registerEvents(BlockDamage, Instance);
-		Instance.getServer().getPluginManager().registerEvents(BlockExplode, Instance);
+		PlayerMoveListener = new SPLPlayerMoveListener(Instance);
+		BlockListener = new SPLBlockListener(Instance);
+		PlayerInteractListener = new SPLPlayerInteractListener(Instance);
+		LeaveListener = new SPLLeaveListener(Instance);
+		JoinListener = new SPLJoinListener(Instance);
+		BlockDamage = new SPLBlockDamage(Instance);
+		BlockExplode = new SPLBlockExplode(Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(PlayerMoveListener, Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(BlockListener, Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(PlayerInteractListener, Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(LeaveListener, Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(JoinListener, Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(BlockDamage, Instance);
+		Bukkit.getServer().getPluginManager().registerEvents(BlockExplode, Instance);
 	}
 }

@@ -20,13 +20,13 @@ public class SpleefCommand implements CommandExecutor{
 			return bsc.NEArgument(sender, cmd, label, args);
 		}
 		else if (args[0].equalsIgnoreCase("join")) {
-			return plugin.SPL_Join.SPLJoin(sender, cmd, label, args);
+			return plugin.SPL_CmdManager.SPL_Join.SPLJoin(sender, cmd, label, args);
 		}
 		else if (args[0].equalsIgnoreCase("leave")) {
-			return plugin.SPL_Leave.SPLLeave(sender, cmd, label, args);
+			return plugin.SPL_CmdManager.SPL_Leave.SPLLeave(sender, cmd, label, args);
 		}
 		else if (args[0].equalsIgnoreCase("reload")) {
-			return plugin.SPL_Reload.SPLReload(sender, cmd, label, args);
+			return plugin.SPL_CmdManager.SPL_Reload.SPLReload(sender, cmd, label, args);
 		}
 		return false;
 	}

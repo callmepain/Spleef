@@ -20,6 +20,7 @@ public class SPL extends JavaPlugin {
 	public static Logger log = Logger.getLogger("Minecraft");
 	public SPLConfig Config;
 	private SPLCommandExecutor CommandExe;
+	
 
 	public SPLUtil Util;
 	public SPLPlayer SPL_Player;
@@ -48,10 +49,6 @@ public class SPL extends JavaPlugin {
 	public ChatColor Chatsiege = ChatColor.AQUA;
 	public ChatColor Chaterr = ChatColor.RED;
 	
-	public join SPL_Join;
-	public leave SPL_Leave;
-	public reload SPL_Reload;
-	
 	public void onEnable() {
 		SPL_Timer = new TimerManager(this);
 		SPL_ListenerManager = new SPLListenerManager(this);
@@ -61,12 +58,14 @@ public class SPL extends JavaPlugin {
 		Util = new SPLUtil(this);
 		config = this.getConfig();
 		CommandExe = new SPLCommandExecutor(this);
+		
 		Config = new SPLConfig(this);
 		
 		
 		getServer().getPluginManager().registerEvents(Config, this);
 		
 		getCommand("SPLAdmin").setExecutor(CommandExe);
+		
 		SPL_SelTool = 271;
 		SPL_State.put("game", false);
 		SPL_State.put("running", false);

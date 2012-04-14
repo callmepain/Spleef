@@ -7,6 +7,7 @@ public class SPLCmdManager {
 	public leave SPL_Leave;
 	public reload SPL_Reload;
 	private SpleefCommand splcmd;
+	
 	public SPLCmdManager(SPL instance) {
 		SPL_Reload = new reload(instance);
 		SPL_Leave = new leave(instance);
