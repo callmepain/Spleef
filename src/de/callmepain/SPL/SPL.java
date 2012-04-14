@@ -11,33 +11,21 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-import de.callmepain.SPL.Listener.SPLBlockDamage;
-import de.callmepain.SPL.Listener.SPLBlockExplode;
-import de.callmepain.SPL.Listener.SPLBlockListener;
-import de.callmepain.SPL.Listener.SPLJoinListener;
-import de.callmepain.SPL.Listener.SPLLeaveListener;
-import de.callmepain.SPL.Listener.SPLPlayerInteractListener;
-import de.callmepain.SPL.Listener.SPLPlayerMoveListener;
+import de.callmepain.SPL.Listener.SPLListenerManager;
 import de.callmepain.SPL.SpleefCommand.*;
 import de.callmepain.SPL.timer.*;
 
 
 public class SPL extends JavaPlugin {
 	public static Logger log = Logger.getLogger("Minecraft");
-	public SPLPlayerMoveListener PlayerMoveListener;
-	public SPLBlockListener BlockListener;
-	public SPLPlayerInteractListener PlayerInteractListener;
-	public SPLLeaveListener LeaveListener;
-	public SPLJoinListener JoinListener;
 	public SPLConfig Config;
 	private SPLCommandExecutor CommandExe;
-	public SPLBlockDamage BlockDamage;
-	public SPLBlockExplode BlockExplode;
 
-	private SpleefCommand splcmd;
 	public SPLUtil Util;
 	public SPLPlayer SPL_Player;
 	public TimerManager SPL_Timer;
+	public SPLListenerManager SPL_ListenerManager;
+	public SPLCmdManager SPL_CmdManager;
 	
 	
 	public FileConfiguration config;
@@ -66,33 +54,18 @@ public class SPL extends JavaPlugin {
 	
 	public void onEnable() {
 		SPL_Timer = new TimerManager(this);
+		SPL_ListenerManager = new SPLListenerManager(this);
+		SPL_CmdManager = new SPLCmdManager(this);
 		
-		SPL_Reload = new reload(this);
-		SPL_Leave = new leave(this);
-		SPL_Join = new join(this);
 		SPL_Player = new SPLPlayer();
 		Util = new SPLUtil(this);
 		config = this.getConfig();
-		PlayerMoveListener = new SPLPlayerMoveListener(this);
-		BlockListener = new SPLBlockListener(this);
-		PlayerInteractListener = new SPLPlayerInteractListener(this);
 		CommandExe = new SPLCommandExecutor(this);
 		Config = new SPLConfig(this);
-		LeaveListener = new SPLLeaveListener(this);
-		JoinListener = new SPLJoinListener(this);
-		BlockDamage = new SPLBlockDamage(this);
-		BlockExplode = new SPLBlockExplode(this);
 		
-		splcmd = new SpleefCommand(this);
-		getServer().getPluginManager().registerEvents(PlayerMoveListener, this);
-		getServer().getPluginManager().registerEvents(BlockListener, this);
-		getServer().getPluginManager().registerEvents(PlayerInteractListener, this);
+		
 		getServer().getPluginManager().registerEvents(Config, this);
-		getServer().getPluginManager().registerEvents(LeaveListener, this);
-		getServer().getPluginManager().registerEvents(JoinListener, this);
-		getServer().getPluginManager().registerEvents(BlockDamage, this);
-		getServer().getPluginManager().registerEvents(BlockExplode, this);
-		getCommand("Spleef").setExecutor(splcmd);
+		
 		getCommand("SPLAdmin").setExecutor(CommandExe);
 		SPL_SelTool = 271;
 		SPL_State.put("game", false);
