@@ -28,7 +28,7 @@ public class join {
 			player.sendMessage(plugin.Chattext + "im Creative modus darfst du nicht teilnehmen!");
 			return true;
 		}
-		if(!plugin.SPL_State.get("game")) {
+		if((!plugin.SPL_State.get("game")) && (!plugin.SPL_State.get("4players"))) {
 			plugin.Util.SPL_ModeChange();
 			SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate1Loc1"), 101, 57);
 			SPLUtil.fillgate(player.getWorld(), plugin.SPL_Gate.get("Gate2Loc1"), 101, 57);
@@ -41,7 +41,7 @@ public class join {
 			plugin.SPL_State.put("game", true);
 			return true;
 		}
-		else if ((plugin.SPL_State.get("game")) && (!plugin.SPL_State.get("running"))) {
+		else if ((plugin.SPL_State.get("game")) && (!plugin.SPL_State.get("running")) && (!plugin.SPL_State.get("4players"))) {
 			if (plugin.SPL_Player.getPlayer1().getName() == player.getName()) {
 				player.sendMessage(plugin.Chattext + "Du kannst nicht gegen dich selber antreten...");
 			}

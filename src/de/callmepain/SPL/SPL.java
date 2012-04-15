@@ -70,6 +70,7 @@ public class SPL extends JavaPlugin {
 		SPL_State.put("running", false);
 		SPL_State.put("closed", false);
 		SPL_State.put("ice", false);
+		SPL_State.put("4players", false);
 		SPL_Bgid = 80;
 		SPL_Bgendid = 79;
 		

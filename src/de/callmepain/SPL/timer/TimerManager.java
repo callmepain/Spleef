@@ -9,6 +9,8 @@ public class TimerManager {
 	public int taskidfight = 0;
 	public int taskidstart = 0;
 	public int taskidclose = 0;
+	public int taskidstart4p = 0;
+	public int taskidclose4p = 0;
 	public int taskidleave = 0;
 	public int taskidplayeringame = 0;
 	
@@ -18,8 +20,11 @@ public class TimerManager {
 	public TimerFight TFight;
 	public TimerStart TStart;
 	public TimerClose TClose;
+	public TimerStart4p TStart4p;
+	public TimerClose4p TClose4p;
 	public TimerLeave TLeave;
 	public TimerPlayeringame TPig;
+	
 	public TimerManager(SPL istance) {
 		T1 = new Timer1(istance);
 		T2 = new Timer2(istance);
@@ -27,6 +32,8 @@ public class TimerManager {
 		TFight = new TimerFight(istance);
 		TStart = new TimerStart(istance);
 		TClose = new TimerClose(istance);
+		TStart4p = new TimerStart4p(istance);
+		TClose4p = new TimerClose4p(istance);
 		TPig = new TimerPlayeringame(istance);
 		TLeave = new TimerLeave(istance);
 	}
