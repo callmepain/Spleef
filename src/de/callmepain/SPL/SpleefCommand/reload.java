@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.callmepain.SPL.SPL;
+import de.callmepain.SPL.SPLConfig;
 
 public class reload {
 	SPL plugin;
@@ -24,7 +25,7 @@ public class reload {
 		plugin.Util.SPL_End();
 		plugin.Util.fill(w, plugin.SPL_Bgendid);
 		plugin.Util.SPLGateChange(true);
-		plugin.Config.LoadConfig();
+		plugin.Config = new SPLConfig(plugin);
 		player.sendMessage(plugin.Chattext + "reload complete");
 		return true;
 	}

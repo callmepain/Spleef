@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
@@ -29,7 +28,7 @@ public class SPL extends JavaPlugin {
 	public SPLCmdManager SPL_CmdManager;
 	
 	
-	public FileConfiguration config;
+	
 	public int SPL_SelTool;
 	public HashMap<String, Location> SPL_Sel = new HashMap<String, Location>();
 	public HashMap<Integer, Location> SPL_Explosion = new HashMap<Integer, Location>();
@@ -56,7 +55,7 @@ public class SPL extends JavaPlugin {
 		
 		SPL_Player = new SPLPlayer();
 		Util = new SPLUtil(this);
-		config = this.getConfig();
+		
 		CommandExe = new SPLCommandExecutor(this);
 		
 		Config = new SPLConfig(this);
@@ -73,7 +72,6 @@ public class SPL extends JavaPlugin {
 		SPL_State.put("ice", false);
 		SPL_Bgid = 80;
 		SPL_Bgendid = 79;
-		Config.LoadConfig();
 		
 		System.out.println(toString() + " enabled");
         log.info("Your plugin has been enabled.");       
